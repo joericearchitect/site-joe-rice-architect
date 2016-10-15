@@ -7,4 +7,10 @@
 #    Uses the Dockerfile in this same git repo
 # *********************************************************************************
 
-docker run -p 8080:8080 -d jarch/site-joe-rice-architecture-static
+NAMESPACE = jarch
+IMAGE_NAME = site-jarch-static-web
+CONTAINER_NAME = jarch-static-web
+
+docker rm $CONTAINER_NAME
+
+docker run --name $CONTAINER_NAME -p 8080:8080 -d $NAMESPACE/$IMAGE_NAME

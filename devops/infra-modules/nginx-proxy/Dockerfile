@@ -1,8 +1,10 @@
-FROM node:argon
+FROM ubuntu:14.04
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# install nginx
+RUN sudo apt-get update  &&
+    sudo apt-get install -y nginx  
+
+
 
 # Install app dependencies
 COPY package.json /usr/src/app/
@@ -12,4 +14,4 @@ RUN npm install
 COPY . /usr/src/app
 
 EXPOSE 8080
-CMD [ "node", "app.js" ]
+#CMD [ "bash" ]

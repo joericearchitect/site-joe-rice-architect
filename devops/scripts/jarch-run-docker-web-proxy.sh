@@ -7,11 +7,9 @@
 #    Uses the Dockerfile in this same git repo
 # *********************************************************************************
 
-DIR="$(cd "$(dirname "$0")" && pwd)"
+IMAGE_NAME = nginx
+CONTAINER_NAME = jarch-web-proxy
 
-cd $DIR/../../application/web-static``
+docker rm $CONTAINER_NAME
 
-NAMESPACE = jarch
-IMAGE_NAME = site-jarch-static-web
-
-docker build -t $NAMESPACE/$IMAGE_NAME .
+docker run --name  $CONTAINER_NAME -d $IMAGE_NAME
