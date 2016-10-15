@@ -7,9 +7,10 @@
 #    Uses the Dockerfile in this same git repo
 # *********************************************************************************
 
-
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-cd $DIR/../../application``
+$DIR/setenv.sh
+
+cd $APP_CODE_DIR
 
 docker-compose up -d

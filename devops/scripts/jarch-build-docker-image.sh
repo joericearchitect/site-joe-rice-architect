@@ -9,13 +9,12 @@
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-cd $DIR/../../application/web-static``
+source $DIR/setenv.sh
 
-NAMESPACE=jarch
-IMAGE_NAME=site-jarch-static-web
+cd $APP_CODE_DIR
 
-docker build -t $NAMESPACE/$IMAGE_NAME .
+docker build -t $SITE_IMAGE_NAME_LOCAL .
 
-docker tag jarch/site-jarch-static-web 193862077204.dkr.ecr.us-east-1.amazonaws.com/jarch:site-jarch-static-web
+docker tag $SITE_IMAGE_NAME_LOCAL SITE_$IMAGE_NAME_REPO
 
-docker push 193862077204.dkr.ecr.us-east-1.amazonaws.com/jarch:site-jarch-static-web
+docker push $SITE_IMAGE_NAME_REPO

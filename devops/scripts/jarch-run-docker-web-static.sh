@@ -7,9 +7,9 @@
 #    Uses the Dockerfile in this same git repo
 # *********************************************************************************
 
-NAMESPACE=jarch
-IMAGE_NAME=site-jarch-static-web
-CONTAINER_NAME=jarch-static-web
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+$DIR/setenv.sh
 
 docker rm $CONTAINER_NAME
 

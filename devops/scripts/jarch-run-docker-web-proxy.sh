@@ -7,8 +7,9 @@
 #    Uses the Dockerfile in this same git repo
 # *********************************************************************************
 
-IMAGE_NAME=nginx
-CONTAINER_NAME=jarch-web-proxy
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+$DIR/setenv.sh
 
 docker rm $CONTAINER_NAME
 

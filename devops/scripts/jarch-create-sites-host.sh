@@ -9,4 +9,8 @@
 #       export AWS_SECRET_ACCESS_KEY=<Super_Top_Secret>
 # *********************************************************************************
 
-docker-machine create -d amazonec2 --amazonec2-vpc-id=vpc-64260003 --amazonec2-region us-east-1 --amazonec2-instance-type "t2.micro" jarch-sites
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+$DIR/setenv.sh
+
+docker-machine create -d amazonec2 --amazonec2-vpc-id=vpc-64260003 --amazonec2-region us-east-1 --amazonec2-instance-type "t2.micro" $MACHINE_NAME_SITE

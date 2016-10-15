@@ -1,7 +1,7 @@
  version: '2'
  services:
    nginx-proxy:
-    image: jwilder/nginx-proxy
+    image: jwilder/nginx-proxy-ngix
     container_name: jarch-web-proxy
     ports:
       - "80:80"
