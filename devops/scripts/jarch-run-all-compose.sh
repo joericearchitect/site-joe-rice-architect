@@ -12,4 +12,4 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 
 cd $DIR/../../application``
 
-docker-compose-up -d
+docker-compose up -d
