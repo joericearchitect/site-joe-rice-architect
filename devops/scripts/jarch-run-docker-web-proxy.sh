@@ -7,8 +7,8 @@
 #    Uses the Dockerfile in this same git repo
 # *********************************************************************************
 
-IMAGE_NAME = nginx
-CONTAINER_NAME = jarch-web-proxy
+IMAGE_NAME=nginx
+CONTAINER_NAME=jarch-web-proxy
 
 docker rm $CONTAINER_NAME
 

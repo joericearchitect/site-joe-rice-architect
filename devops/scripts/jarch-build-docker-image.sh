@@ -11,7 +11,7 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 
 cd $DIR/../../application/web-static``
 
-NAMESPACE = jarch
-IMAGE_NAME = site-jarch-static-web
+NAMESPACE=jarch
+IMAGE_NAME=site-jarch-static-web
 
 docker build -t $NAMESPACE/$IMAGE_NAME .

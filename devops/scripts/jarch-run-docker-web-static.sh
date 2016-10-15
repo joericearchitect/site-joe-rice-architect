@@ -7,9 +7,9 @@
 #    Uses the Dockerfile in this same git repo
 # *********************************************************************************
 
-NAMESPACE = jarch
-IMAGE_NAME = site-jarch-static-web
-CONTAINER_NAME = jarch-static-web
+NAMESPACE=jarch
+IMAGE_NAME=site-jarch-static-web
+CONTAINER_NAME=jarch-static-web
 
 docker rm $CONTAINER_NAME
 
