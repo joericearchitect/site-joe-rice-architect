@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/joericearchitect/site-joericearchitect#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "morgan": "*"
   }
 }
