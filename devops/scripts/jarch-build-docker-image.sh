@@ -7,6 +7,8 @@
 #    Uses the Dockerfile in this same git repo
 # *********************************************************************************
 
-ls -l ../..
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+cd $DIR/../../application/web-static
 
 docker build -t jarch/site-joe-rice-architecture-static .
