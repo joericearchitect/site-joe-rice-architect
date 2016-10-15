@@ -9,6 +9,6 @@
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-cd $DIR/../../application/web-static
+cd $DIR/../../application/web-static``
 
 docker build -t jarch/site-joe-rice-architecture-static .
