@@ -10,6 +10,7 @@
       
    db:
      image: mysql:5.7
+     container_name: jarch-blog-mysql
      volumes:
        - "./.data/db:/var/lib/mysql"
      restart: always
@@ -23,7 +24,7 @@
      depends_on:
        - db
      image: wordpress:latest
-     container_name: jarch-blog
+     container_name: jarch-blog-wordpress
      links:
        - db
      ports:
@@ -36,12 +37,11 @@
        
 
    jarch-site:
-     image: site-jarch-static-web:latest
-     container_name: jarch-static-web
+     image: jarch/site-jarch-static-web:latest
+     container_name: jarch-site-static-web
      ports:
-       - "8081:80"
+       - "8081:8080"
      restart: always
      environment: 
        VIRTUAL_HOST: www.joericearchitect.com
        
-        
