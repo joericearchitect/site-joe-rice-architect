@@ -11,7 +11,6 @@ SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
 APP_CODE_DIR=$SCRIPTS_DIR/../../application/web-static
 
 MACHINE_NAME_SITE=jarch-sites
-MACHINE_NAME_BUILD=jarch-builds
 MACHINE_NAME_ADMIN=jarch-admin
 
 NAMESPACE=jarch
