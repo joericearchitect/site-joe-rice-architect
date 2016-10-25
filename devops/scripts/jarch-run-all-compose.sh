@@ -11,6 +11,6 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 
 source $DIR/setenv.sh
 
-cd $LOGGING_SERVER_CODE_DIR
+cd $APP_CODE_DIR
 
 docker-compose up -d
