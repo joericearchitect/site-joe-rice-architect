@@ -33,7 +33,7 @@
      environment:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_PASSWORD: wordpress
-       VIRTUAL_HOST: blog.joericearchitect.com
+       VIRTUAL_HOST: blog-wp.joericearchitect.com
        
 
    jarch-site:
