@@ -8,7 +8,10 @@
 # *********************************************************************************
 
 SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
-APP_CODE_DIR=$SCRIPTS_DIR/../../application/web-static
+JARCH_APPS_DIR=$SCRIPTS_DIR/../../application
+JARCH_STATIC_WEB_APP_CODE_DIR=$JARCH_APPS_DIR/web-static
+JARCH_BLOG_WORDPRESS_APP_CODE_DIR=$JARCH_APPS_DIR/blog/wordpress
+JARCH_BLOG_DRUPAL_APP_CODE_DIR=$JARCH_APPS_DIR/blog/drupal
 
 MACHINE_NAME_SITE=jarch-sites
 MACHINE_NAME_ADMIN=jarch-admin

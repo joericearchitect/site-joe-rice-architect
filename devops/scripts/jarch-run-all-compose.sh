@@ -11,6 +11,10 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 
 source $DIR/setenv.sh
 
-cd $APP_CODE_DIR
+cd $JARCH_STATIC_WEB_APP_CODE_DIR
 
-docker-compose up -d
+echo docker command -    docker-compose -f $JARCH_APPS_DIR/docker-compose.yml -f $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml up -d
+
+docker-compose -f $JARCH_APPS_DIR/docker-compose.yml -f $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml up -d
+
+#docker-compose -f $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_DRUPAL_APP_CODE_DIR/docker-compose.yml up -d
