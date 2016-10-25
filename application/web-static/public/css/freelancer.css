@@ -810,10 +810,6 @@ expertise .expertise-item {
 	color: #5C84AD;
 }
 
-.panel-small>a:hover {
-	color: #3d8b3d;
-}
-
 .panel-large {
 	border-color: #5C84AD;
 }
@@ -985,11 +981,6 @@ hr {
 
 .panel-highlight .panel-body {
 	background-color: #f4dbb7;
-}
-
-.panel-highlight .panel-body .table>thead>tr:hover, .panel-highlight .panel-body .table>tbody>tr:hover,
-	.panel-highlight .panel-body .table>tfoot>tr:hover {
-	background-color: #f4b04f;
 }
 
 .expertise-breadcrumbs {
