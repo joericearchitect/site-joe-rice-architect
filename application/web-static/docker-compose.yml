@@ -1,7 +1,7 @@
  version: '2'
  services:
    jarch-site:
-     image: 193862077204.dkr.ecr.us-east-1.amazonaws.com/jarch:site-jarch-static-web
+     image: jarch/site-jarch-static-web
      container_name: jarch-site-static-web
      ports:
        - "8081:8080"
