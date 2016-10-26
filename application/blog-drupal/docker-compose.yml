@@ -19,8 +19,6 @@
        - drupal-db
      image: drupal:8
      container_name: jarch-blog-drupal
-     volumes:
-       - "./docker-runtime/drupal/htmlroot:/var/www/html"
      links:
        - drupal-db:mysql
      ports:
@@ -31,4 +29,5 @@
        DRUPAL_SITE_NAME: Drupal
        DRUPAL_USER: admin
        DRUPAL_PASS: admin
+       DRUPAL_DBURL: mysql://drupal:drupal@drupal-db:3307/drupal
        VIRTUAL_HOST: blog.joericearchitect.com
