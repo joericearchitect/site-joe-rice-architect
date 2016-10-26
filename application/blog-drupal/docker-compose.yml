@@ -3,6 +3,7 @@ version: "2"
 services:
   mariadb:
     image: wodby/drupal-mariadb
+    container_name: jarch-blog-drupal-mariadb
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 1
       MYSQL_DATABASE: drupal
@@ -15,6 +16,7 @@ services:
 
   php:
     image: wodby/drupal-php:7.0 # Allowed: 7.0, 5.6.
+    container_name: jarch-blog-drupal-php
     environment:
       PHP_SITE_NAME: dev
       PHP_HOST_NAME: localhost:8000
@@ -29,7 +31,9 @@ services:
 
   nginx:
     image: wodby/drupal-nginx
+    container_name: jarch-blog-drupal-nginx
     environment:
+      VIRTUAL_HOST: blog.joericearchitect.com
       NGINX_SERVER_NAME: localhost
       NGINX_UPSTREAM_NAME: php
 #      NGINX_DOCROOT: public # Relative path inside the /var/www/html/ directory.
@@ -41,6 +45,7 @@ services:
 
   pma:
     image: phpmyadmin/phpmyadmin
+    container_name: jarch-blog-drupal-phpmyadmin
     environment:
       PMA_HOST: mariadb
       PMA_USER: drupal
@@ -52,14 +57,17 @@ services:
 
   mailhog:
     image: mailhog/mailhog
+    container_name: jarch-blog-drupal-mailhog
     ports:
       - "8002:8025"
 
 #  redis:
 #    image: redis:3.2-alpine
+#    container_name: jarch-blog-drupal-redis
 
 #  memcached:
 #    image: memcached:1.4-alpine
+#    container_name: jarch-blog-drupal-memcached
 
 #  memcached-admin:
 #    image: phynias/phpmemcachedadmin
@@ -68,6 +76,7 @@ services:
 
 #  solr:
 #    image: solr:5.5-alpine
+#    container_name: jarch-blog-drupal-solr
 #    volumes:
 #      - ./docker-runtime/solr:/opt/solr/server/solr/mycores
 #    entrypoint:
@@ -79,6 +88,7 @@ services:
 
 #  varnish:
 #    image: wodby/drupal-varnish
+#    container_name: jarch-blog-drupal-varnish
 #    depends_on:
 #      - nginx
 #    environment:
@@ -93,6 +103,7 @@ services:
 
 #  sshd:
 #    image: wodby/drupal-sshd
+#    container_name: jarch-blog-drupal-sshd
 #    environment:
 #      SSH_PUB_KEY: "ssh-rsa ..."
 #    volumes_from:

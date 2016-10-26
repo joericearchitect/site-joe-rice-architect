@@ -8,4 +8,3 @@
      restart: always
      environment: 
        VIRTUAL_HOST: www.joericearchitect.com
-       
