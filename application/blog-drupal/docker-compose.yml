@@ -6,13 +6,13 @@
      volumes:
        - "./docker-runtime/mysql/.data/db:/var/lib/mysql"
      restart: always
+     ports:
+      - "3306:3306"
      environment:
        MYSQL_ROOT_PASSWORD: root
        MYSQL_DATABASE: drupal
        MYSQL_USER: drupal
        MYSQL_PASSWORD: drupal
-       ports:
-        - "3306:3306"
 
    drupal-web:
      depends_on:
