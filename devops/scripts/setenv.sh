@@ -8,10 +8,18 @@
 # *********************************************************************************
 
 SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 JARCH_APPS_DIR=$SCRIPTS_DIR/../../application
 JARCH_STATIC_WEB_APP_CODE_DIR=$JARCH_APPS_DIR/web-static
-JARCH_BLOG_WORDPRESS_APP_CODE_DIR=$JARCH_APPS_DIR/blog/wordpress
-JARCH_BLOG_DRUPAL_APP_CODE_DIR=$JARCH_APPS_DIR/blog/drupal
+JARCH_BLOG_WORDPRESS_APP_CODE_DIR=$JARCH_APPS_DIR/blog-wordpress
+JARCH_BLOG_DRUPAL_APP_CODE_DIR=$JARCH_APPS_DIR/blog-drupal
+
+INFRA_COMMON_HOME_DIR=$SCRIPTS_DIR/../../../dev-ops-common
+#INFRA_COMMON_HOME_DIR=$SCRIPTS_DIR/../../../infra-common
+
+INFRA_MODULES_HOME_DIR=$INFRA_COMMON_HOME_DIR/infra-modules
+
+INFRA_NGINX_PROXY_APP_DIR=$INFRA_MODULES_HOME_DIR/nginx-proxy
 
 MACHINE_NAME_SITE=jarch-sites
 MACHINE_NAME_ADMIN=jarch-admin
