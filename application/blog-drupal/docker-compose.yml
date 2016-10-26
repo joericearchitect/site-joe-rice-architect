@@ -47,6 +47,7 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: jarch-blog-drupal-phpmyadmin
     environment:
+      VIRTUAL_HOST: blog-admin.joericearchitect.com
       PMA_HOST: mariadb
       PMA_USER: drupal
       PMA_PASSWORD: drupal
