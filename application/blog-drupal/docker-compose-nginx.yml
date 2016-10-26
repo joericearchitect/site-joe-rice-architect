@@ -1,0 +1,11 @@
+ version: '2'
+ services:
+   nginx-drupal-nginx:
+     extends:
+       file: ${JARCH_BLOG_DRUPAL_APP_CODE_DIR}/docker-compose.yml
+       service: nginx-drupal
+     depends_on:
+       - nginx-proxy
+     environment: 
+       VIRTUAL_HOST: blog.joericearchitect.com
+       

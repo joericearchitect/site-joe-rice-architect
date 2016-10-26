@@ -1,0 +1,11 @@
+ version: '2'
+ services:
+   jarch-site-nginx:
+     extends:
+       file: ${JARCH_STATIC_WEB_APP_CODE_DIR}/docker-compose.yml
+       service: jarch-site
+     depends_on:
+       - nginx-proxy
+     environment: 
+       VIRTUAL_HOST: www.joericearchitect.com
+       
