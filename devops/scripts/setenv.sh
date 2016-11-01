@@ -14,7 +14,7 @@ export JARCH_STATIC_WEB_APP_CODE_DIR=$JARCH_APPS_DIR/web-static
 export JARCH_BLOG_WORDPRESS_APP_CODE_DIR=$JARCH_APPS_DIR/blog-wordpress
 export JARCH_BLOG_DRUPAL_APP_CODE_DIR=$JARCH_APPS_DIR/blog-drupal
 
-export INFRA_COMMON_HOME_DIR=$SCRIPTS_DIR/../../../dev-ops-common
+export INFRA_COMMON_HOME_DIR=$SCRIPTS_DIR/../../../shared-infra
 #export INFRA_COMMON_HOME_DIR=$SCRIPTS_DIR/../../../infra-common
 
 export INFRA_MODULES_HOME_DIR=$INFRA_COMMON_HOME_DIR/infra-modules

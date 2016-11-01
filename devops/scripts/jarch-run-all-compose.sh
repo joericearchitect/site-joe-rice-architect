@@ -26,6 +26,9 @@ echo ***************************************************************************
 
 echo command to start all sites      - docker-compose -f $INFRA_NGINX_PROXY_APP_DIR/docker-compose.yml -f $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml up -d
 
-docker-compose -f $INFRA_NGINX_PROXY_APP_DIR/docker-compose.yml -f $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose-nginx.yml -f $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_DRUPAL_APP_CODE_DIR/docker-compose.yml up -d
+docker-compose -f $INFRA_NGINX_PROXY_APP_DIR/docker-compose.yml up -d
+docker-compose -f $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose.yml up -d
+docker-compose -f $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml up -d
+docker-compose -f $JARCH_BLOG_DRUPAL_APP_CODE_DIR/docker-compose.yml up -d
 
 #docker-compose -f $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_DRUPAL_APP_CODE_DIR/docker-compose.yml up -d
