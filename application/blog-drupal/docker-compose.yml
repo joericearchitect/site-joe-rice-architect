@@ -18,7 +18,7 @@
      depends_on:
        - drupal-db
      image: drupal:8
-     container_name: jarch-blog-drupal
+     container_name: jarch-blog-drupal-ui
      links:
        - drupal-db
      ports:

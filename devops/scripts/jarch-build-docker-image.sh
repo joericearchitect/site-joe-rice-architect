@@ -9,7 +9,7 @@
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-source $DIR/setenv.sh
+source $DIR/jarch-setenv.sh
 
 cd $JARCH_STATIC_WEB_APP_CODE_DIR
 

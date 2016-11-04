@@ -9,8 +9,6 @@
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-$DIR/setenv.sh
+source $DIR/jarch-setenv.sh
 
-docker rm $CONTAINER_NAME
-
-docker run --name  $CONTAINER_NAME -d $IMAGE_NAME
+$INFRA_SCRIPTS_DOCKER_DIR/stop-docker-container-compose.sh "Wordpress Blog" $INFRA_NGINX_PROXY_APP_DIR
