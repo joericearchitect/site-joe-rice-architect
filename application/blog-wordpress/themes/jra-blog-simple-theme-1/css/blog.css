@@ -223,6 +223,14 @@ fieldset[disabled] .navbar-custom .btn-link:focus {
 }
 @media (min-width: 767px) {
 	#blog-search-well {
-		margin-top: 3.5rem;
+		margin-top: 10px;
 	}
+	.blog-post-title {
+		margin-top: 10px;
+	}
+}
+
+.page-header {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }

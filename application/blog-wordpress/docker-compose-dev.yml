@@ -1,0 +1,31 @@
+ version: '2'
+ services:
+   wordpress-db:
+     image: mysql:5.7
+     container_name: jarch-blog-wordpress-dev-mysql
+     volumes:
+       - "~/docker-volumes/blog-wordpress/.data/db:/var/lib/mysql"
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: wordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+
+   wordpress:
+     depends_on:
+       - wordpress-db
+     image: wordpress:latest
+     container_name: jarch-blog-wordpress-dev-ui
+     volumes:
+       - ./data:/data
+       - ./themes/jra-blog-simple-theme-1:/var/www/html/wp-content/themes/jra-blog-simple-theme-1
+     links:
+       - wordpress-db
+     ports:
+       - "8280:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: wordpress-db:3306
+       WORDPRESS_DB_PASSWORD: wordpress
+       VIRTUAL_HOST: blog-wp.joericearchitect.com

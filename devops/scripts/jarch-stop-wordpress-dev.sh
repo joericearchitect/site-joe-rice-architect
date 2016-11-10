@@ -11,4 +11,4 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 
 source $DIR/jarch-setenv.sh
 
-$INFRA_SCRIPTS_DOCKER_DIR/stop-docker-container-compose.sh "Wordpress Blog" $JARCH_BLOG_WORDPRESS_DEV_APP_CODE_DIR
+$INFRA_SCRIPTS_DOCKER_DIR/stop-docker-container-compose.sh "Wordpress Blog" $JARCH_BLOG_WORDPRESS_APP_CODE_DIR
