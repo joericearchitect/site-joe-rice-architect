@@ -17,7 +17,7 @@ echo .
 echo .
 
 echo --------------------------------------------------------------------------------
-echo - Stopping containers with the follwoing compose files:
+echo - starting containers with the follwoing compose files:
 echo -   Nginx - $INFRA_NGINX_PROXY_APP_DIR/docker-compose.yml
 echo -   J-Arch Site - $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose.yml
 echo -   WordPress   - $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml

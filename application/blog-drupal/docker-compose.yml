@@ -30,4 +30,4 @@
        DRUPAL_USER: admin
        DRUPAL_PASS: admin
        DRUPAL_DBURL: mysql://drupal:drupal@drupal-db:3307/drupal
-       VIRTUAL_HOST: blog.joericearchitect.com
+       VIRTUAL_HOST: blog-dp.joericearchitect.com
