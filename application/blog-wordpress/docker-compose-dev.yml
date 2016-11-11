@@ -15,7 +15,9 @@
    wordpress:
      depends_on:
        - wordpress-db
-     image: wordpress:latest
+     build:
+       context: $JARCH_BLOG_WORDPRESS_APP_CODE_DIR
+       dockerfile: Dockerfile
      container_name: jarch-blog-wordpress-dev-ui
      volumes:
        - $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/data:/data
@@ -28,4 +30,4 @@
      environment:
        WORDPRESS_DB_HOST: wordpress-db:3306
        WORDPRESS_DB_PASSWORD: wordpress
-       VIRTUAL_HOST: blog.joericearchitect.com
+       VIRTUAL_HOST: blog-wp.joericearchitect.com
