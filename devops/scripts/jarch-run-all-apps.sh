@@ -24,7 +24,7 @@ echo -   WordPress   - $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml
 echo -   Drupal      - $JARCH_BLOG_DRUPAL_APP_CODE_DIR/docker-compose.yml
 echo --------------------------------------------------------------------------------
 
-docker-compose -f $INFRA_NGINX_PROXY_APP_DIR/docker-compose.yml -f $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose-dev.yml -f $JARCH_BLOG_DRUPAL_APP_CODE_DIR/docker-compose.yml up -d
+docker-compose -f $INFRA_NGINX_PROXY_APP_DIR/docker-compose.yml -f $JARCH_STATIC_WEB_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/docker-compose.yml -f $JARCH_BLOG_DRUPAL_APP_CODE_DIR/docker-compose.yml up -d
 
 #$INFRA_SCRIPTS_DOCKER_DIR/run-docker-container-compose.sh "Wordpress Blog" $INFRA_NGINX_PROXY_APP_DIR
 #$INFRA_SCRIPTS_DOCKER_DIR/run-docker-container-compose.sh "Wordpress Blog" $JARCH_STATIC_WEB_APP_CODE_DIR

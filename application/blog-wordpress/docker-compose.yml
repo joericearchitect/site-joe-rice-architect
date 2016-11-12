@@ -15,7 +15,7 @@
    wordpress:
      depends_on:
        - wordpress-db
-     image: wordpress:latest
+     image: jarch/jarch-blog-wordpress
      container_name: jarch-blog-wordpress-ui
      links:
        - wordpress-db

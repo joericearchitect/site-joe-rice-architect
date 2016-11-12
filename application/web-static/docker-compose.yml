@@ -1,7 +1,7 @@
  version: '2'
  services:
    jarch-site:
-     image: jarch/site-jarch-static-web
+     image: jarch/jarch-site-web-static
      container_name: jarch-site-static-web
      ports:
        - "8480:8080"
