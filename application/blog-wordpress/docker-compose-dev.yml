@@ -15,7 +15,7 @@
    wordpress:
      depends_on:
        - wordpress-db
-     image: jarch/site-jarch-blog-wordpress
+     image: wordpress:latest
      container_name: jarch-blog-wordpress-dev-ui
      volumes:
        - $JARCH_BLOG_WORDPRESS_APP_CODE_DIR/data:/data

@@ -1,5 +1,14 @@
 <?php get_header(); ?>
 
+	<div class="container">
+		<h1 class="page-header">
+			<?php echo get_bloginfo( 'name' ); ?> <small><?php echo get_bloginfo( 'description' ); ?></small>
+		</h1>
+	</div>
+
+	<!-- Page Content -->
+	<div class="container">
+
 		<div class="row">
 
 			<!-- Blog Entries Column -->
@@ -19,10 +28,12 @@
 				?>
 
 				<!-- Pager -->
-				<ul class="pager">
-					<li class="previous"><a href="#">&larr; Older</a></li>
-					<li class="next"><a href="#">Newer &rarr;</a></li>
-				</ul>
+				<nav>
+					<ul class="pager">
+						<li><?php next_posts_link( 'Previous' ); ?></li>
+						<li><?php previous_posts_link( 'Next' ); ?></li>
+					</ul>
+				</nav>
 
 			</div>
 			

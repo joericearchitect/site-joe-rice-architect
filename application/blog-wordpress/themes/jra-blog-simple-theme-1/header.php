@@ -32,7 +32,7 @@
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-		<div class="container">
+		<div id="menu-contents-container" class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -140,8 +140,18 @@
 								<li><a href="#">All...</a></li>
 							</ul></li>
 
-						<li><a href="#">Tech Industry and Trends</a></li>
 					</ul>
+
+				    <div class="col-sm-3 col-md-3 pull-right">
+				        <form class="navbar-form" role="search">
+				        <div class="input-group">
+				            <input type="text" class="form-control" placeholder="Search" name="q">
+				            <div class="input-group-btn">
+				                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				            </div>
+				        </div>
+				        </form>
+				    </div>
 				</div>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -151,13 +161,4 @@
 	<div class="img-holder">
 		<img class="img-avatar img-circle img-responsive"
 			src="<?php bloginfo('template_directory');?>/image/joe-rice-avatar.png">
-	</div>
-	<div class="container">
-		<h1 class="page-header">
-			<?php echo get_bloginfo( 'name' ); ?> <small><?php echo get_bloginfo( 'description' ); ?></small>
-		</h1>
-	</div>
-
-	<!-- Page Content -->
-	<div class="container">
-	
+	</div>	
