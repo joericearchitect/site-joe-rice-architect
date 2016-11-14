@@ -15,12 +15,6 @@
 	</div>
 	<!-- /.container -->
 
-	<!-- jQuery -->
-	<script src="<?php bloginfo('template_directory');?>/js/vendor/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="<?php bloginfo('template_directory');?>/js/vendor/bootstrap.js"></script>
-	
 	<?php wp_footer(); ?> 
 </body>
 

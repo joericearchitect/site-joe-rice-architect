@@ -24,7 +24,7 @@ export INFRA_SCRIPTS_DOCKER_DIR=$INFRA_SCRIPTS_HOME_DIR/docker
 
 export INFRA_NGINX_PROXY_APP_DIR=$INFRA_MODULES_HOME_DIR/nginx-proxy
 
-export MACHINE_NAME_SITE=jarch-sites
+export MACHINE_NAME_SITE=jarch-web
 export MACHINE_NAME_ADMIN=jarch-admin
 
 export JARCH_WEB_STATIC_NAMESPACE=jarch

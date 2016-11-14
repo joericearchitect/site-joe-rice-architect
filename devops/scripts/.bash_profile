@@ -1,2 +1,2 @@
-export AWS_ACCESS_KEY_ID=<Secret>
-export AWS_SECRET_ACCESS_KEY=<Super_Top_Secret>
+export AWS_ACCESS_KEY=<Secret>
+export AWS_SECRET_KEY=<Super_Top_Secret>
