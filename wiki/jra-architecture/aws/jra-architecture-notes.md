@@ -1,0 +1,158 @@
+# JRA Architecture Notes
+
+## Overview
+
+This page is a free-form collection of notes and links as I start to build out the Joe Rice Architect architecture documentation.
+
+## Links and stuff
+
+**AWS infrastructure and architecture Documents**
+
+* High-Level AWS infrastructure - [Google Doc Drawing](https://docs.google.com/drawings/d/10Z6i-1Ge9CzbDfNAYTXsVc7q3LhO6wSO_0Z1DwOQO34/edit)
+
+##Stuff to document in Architecture##
+
+###Infrastructure Architecture###
+**High-Level AWS Infrastructure**
+![High Level AWS infrastructure](jra-aws-infrastructure-high-level.jpg)
+* 1 VPC Per Environment
+* Use 3 Availability Zones for High Availability & Disaster Recovery
+* Each Avail Zone has 1 public subnet and 1 private subnet
+* Each Avail Zone has 1 Docker Swarm.  1 Swarm Manager and Multiple Swarm Nodes (each swarm manager and node will have 2 or more ec2 instances)
+* Swarm Manager is in private subnet.  But manages swarm nodes in both public and private subnet
+
+**Detailed AWS Infrastructure**
+
+**Management Swarm Nodes**
+
+**Application Swarm Nodes**
+
+**Security**
+
+**Logging**
+
+**Monitoring**
+   **Infrastructure
+   **Containers
+   **Application
+
+**Deployment Pipeline**
+
+**Environments**
+
+###Application Architecture###
+**Media Management**
+
+**Content Management**
+
+**Persistence**
+
+## Infrastructure setup - Full List
+
+**Security Zones**
+
+* Public Security Zones
+  - app-ui-web
+  - app-ui-web-pci
+  - app-ui-mobile
+  - app-ui-cache
+  - app-api-web
+* private Security Zones
+  - build
+  - app-api-service
+  - app-api-service-pci
+  - app-persistence
+  - management
+  - management-persistence
+  - admin
+  - admin-pci
+
+**Swarm Nodes**
+
+* Public Swarm Nodes
+  - app-ui-web
+  - app-ui-web-pci
+  - app-ui-mobile
+  - app-api-web
+* private Swarm Nodes
+  - build
+  - app-api-service
+  - app-api-service-large
+  - app-api-service-pci
+  - app-api-service-pci-large
+  - app-persistence
+  - app-persistence-large
+  - management
+  - management-persistence
+  - admin
+  - admin-pci
+
+## Infrastructure setup - JRA
+
+**Security Zones**
+
+* Public Security Zones
+  - app-ui-web
+  - app-api-web
+* private Security Zones
+  - build
+  - app-api-service
+  - app-persistence
+  - management
+  - management-persistence
+  - admin
+  - admin-pci
+
+**Swarm Nodes**
+
+* Public Swarm Nodes
+  - app-ui-web
+  - app-api-web
+* private Swarm Nodes
+  - build
+  - app-api-service
+  - app-api-service-large
+  - app-persistence
+  - app-persistence-large
+  - management
+  - management-persistence
+  - admin
+  - monitoring
+
+**Standard Tags on Infrastructure**
+
+* com.jra.environment
+  - latest
+  - stage
+  - qa-static
+  - qa-push
+  - production
+* com.jra.environment-type
+  - latest
+  - test-regression
+  - test-uat
+  - test-pat
+  - test-penetration
+  - test-load
+  - pre-prod
+  - prod
+* com.jra.environment-flip
+  - blue
+  - green
+* com.jra.application-name
+* com.jra.container-name
+* com.jra.failure-zone
+  - us-east-1-az-1
+  - us-east-1-az-2
+  - us-east-1-az-3
+  - us-west-1-az-1
+  - us-west-1-az-2
+  - us-east-1-az-3
+
+**Ports to open for security groups**
+
+* Overlay network between all swarm nodes in application network:
+  -  Port 7946 TCP/UDP  - for container network discovery.
+  -  Port 4789 TCP/UDP  - for the container overlay network.
+  -  Port 50 TCP/UDP    - for the container overlay network with encryption (--opt encrypted)
+  -  Port 2377 TCP      - for cluster management communications

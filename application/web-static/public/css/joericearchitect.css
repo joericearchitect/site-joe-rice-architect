@@ -666,13 +666,14 @@ expertise .expertise-item {
 }
 
 #expertise .expertise-item .expertise-link .expertise-hover {
-	background: #f4b04f;
+	background: #e1e6ef;
 	position: absolute;
+  overflow: hidden;
+  /* position: relative; */
 	width: 100%; height : 100%;
+	padding: 10px;
 	opacity: 0;
-	transition: all ease 0.5s;
-	-webkit-transition: all ease 0.5s;
-	-moz-transition: all ease 0.5s;
+	
 	height: 100%;
 }
 
@@ -687,9 +688,9 @@ expertise .expertise-item {
 	height: 30px;
 	font-size: 20px;
 	text-align: center;
-	top: 50%;
-	margin-top: -12px;
-	color: white;
+	top: 20%;
+	/* margin-top: -12px; */
+	color: black;
 }
 
 #expertise .expertise-item .expertise-link .expertise-hover .expertise-hover-content i
@@ -703,7 +704,7 @@ expertise .expertise-item {
 	margin: 0;
 }
 
-#expertise .expertise-item .expertise-link .expertise-caption {
+#expertise .expertise-item .expertise-caption {
 	max-width: 400px;
 	margin: 0 auto;
 	background-color: white;
@@ -714,13 +715,13 @@ expertise .expertise-item {
 	margin: 0 0 30px;
 }
 
-#expertise .expertise-item .expertise-link .expertise-caption h4 {
+#expertise .expertise-item .expertise-caption h4 {
 	text-transform: none;
 	margin: 0;
 	font-size: 20px;
 }
 
-#expertise .expertise-item .expertise-link .expertise-caption p {
+#expertise .expertise-item .expertise-caption p {
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial,
 		sans-serif font-style : italic;
 	font-size: 16px;
@@ -825,6 +826,115 @@ expertise .expertise-item {
 	opacity: 0;
 	display: none;
 }
+
+
+/* 
+	######### Expertise Section start ######################################################################
+ */
+
+expertise .expert-item {
+	margin: 0 0 15px;
+	right: 0;
+}
+
+#
+@media ( min-width : 767px) {
+	.expert-item {
+		margin: 0 0 30px;
+	}
+}
+
+
+
+.expert-link {
+	display: block;
+	position: relative;
+	max-width: 400px;
+	margin: 0 auto;
+	color: black;
+}
+
+
+
+.expert-hover {
+	background: #e1e6ef;
+	position: absolute;
+	width: 100%; height : 100%;
+	height: 100%;
+  	overflow: hidden;
+}
+
+.expert-hover-content:hover  { 
+	background-color: rgba(255,255,255,0.9);
+  	bottom: 0;
+	opacity: 1;
+}
+
+
+
+.expert-hover-content
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	font-size: 20px;
+	text-align: center;
+	top: 50%;
+	margin-top: -12px;
+	opacity: 0;
+	color: black;
+	padding: 10px;
+	bottom: -193px; 
+  
+  transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.expert-hover-content i
+	{
+	margin-top: -12px;
+}
+
+.expert-hover-content h3,
+	.expert-hover-content h4
+	{
+	margin: 0;
+}
+
+
+.expert-caption {
+	max-width: 400px;
+	margin: 0 auto;
+	background-color: white;
+	text-align: center;
+	padding: 25px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin: 0 0 30px;
+}
+
+.expert-caption h4 {
+	text-transform: none;
+	margin: 0;
+	font-size: 20px;
+}
+
+.expert-caption p {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial,
+		sans-serif font-style : italic;
+	font-size: 16px;
+	margin: 0;
+}
+
+
+/* 
+	######### Expertise Section end ######################################################################
+ */
+
+
+
+
 
 .panel-default {
 	
