@@ -671,6 +671,11 @@ function setDocumentScrollTop(ypos)
    <li>Infrastructure as Code</li> 
    <li>Automated and repeatable</li> 
   </ul> </li> 
+ <li> <p>Use Ansible to provision the Docker Swarm Instances created by Terraform.</p> 
+  <ul> 
+   <li>Creates a Docker Swarm, then adds all manager and worker node instances to the swarm.</li> 
+   <li>Ansible provisioning executed from Terraform.</li> 
+  </ul> </li> 
  <li> <p>Use Docker Swarm mode for container scheduling and cluster management</p> 
   <ul> 
    <li>All app components, persistence, and infrastructure run as Docker micro-service containers</li> 
@@ -728,6 +733,12 @@ function setDocumentScrollTop(ypos)
    <li>There is a concept of a &quot;mount&quot;.</li> 
    <li>But, not for data volume, like regular docker engine.</li> 
    <li>Details are stil murky.</li> 
+  </ul> </li> 
+ <li> <p>Docker Swarm mode doesn't support docker compose in current versino 1.12. So, you can't use docker-compose.yml files to deploy containers.</p> 
+  <ul> 
+   <li>But there's hope! Docker is adding a new concept called &quot;Bundles&quot; which are &quot;stacks&quot; of applications to be deployed together.</li> 
+   <li>If you install and run the current experimental version of Docker engine, you can use a tool to convert your docker-compose.yml into the bundle format. Then deploy the bundle.</li> 
+   <li>Docker 1.13 release will support deploying compose files as bundles natively.</li> 
   </ul> </li> 
 </ul> 
 <h2> <a id="terraform" class="anchor" href="#terraform" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Terraform</h2> 

@@ -28,10 +28,14 @@
    - Infrastructure as Code
    - Automated and repeatable
 
-2. Use Docker Swarm mode for container scheduling and cluster management
+2. Use Ansible to provision the Docker Swarm Instances created by Terraform.
+   - Creates a Docker Swarm, then adds all manager and worker node instances to the swarm.
+   - Ansible provisioning executed from Terraform.
+
+3. Use Docker Swarm mode for container scheduling and cluster management
    - All app components, persistence, and infrastructure run as Docker micro-service containers
 
-3. Use Jenkins Pipeline and Blue Ocean plugins for CI / CD
+4. Use Jenkins Pipeline and Blue Ocean plugins for CI / CD
    - Pushbutton plans to:
      + Build out "latest" and "production" environments (using terraform scripts)
      + Spin up ad-hoc dynamic environments (using terraform scripts)
@@ -71,6 +75,11 @@
   - There is a concept of a "mount".
   - But, not for data volume, like regular docker engine.
   - Details are stil murky.
+
+* Docker Swarm mode doesn't support docker compose in current versino 1.12.  So, you can't use docker-compose.yml files to deploy containers.
+  - But there's hope!  Docker is adding a new concept called "Bundles" which are "stacks" of applications to be deployed together.
+  - If you install and run the current experimental version of Docker engine, you can use a tool to convert your docker-compose.yml into the bundle format.  Then deploy the bundle.
+  - Docker 1.13 release will support deploying compose files as bundles natively.
 
 ## Terraform ##
 

@@ -82,8 +82,10 @@ This page is a free-form collection of notes and links as I start to build out t
   - app-api-service-pci-large
   - app-persistence
   - app-persistence-large
+  - app-persistence-read
   - management
   - management-persistence
+  - management-persistence-read
   - admin
   - admin-pci
 
@@ -98,8 +100,10 @@ This page is a free-form collection of notes and links as I start to build out t
   - build
   - app-api-service
   - app-persistence
+  - app-persistence=read
   - management
   - management-persistence
+  - management-persistence-read
   - admin
   - admin-pci
 
@@ -114,8 +118,10 @@ This page is a free-form collection of notes and links as I start to build out t
   - app-api-service-large
   - app-persistence
   - app-persistence-large
+  - app-persistence-read
   - management
   - management-persistence
+  - management-persistence-read
   - admin
   - monitoring
 
