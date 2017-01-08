@@ -162,3 +162,25 @@ This page is a free-form collection of notes and links as I start to build out t
   -  Port 4789 TCP/UDP  - for the container overlay network.
   -  Port 50 TCP/UDP    - for the container overlay network with encryption (--opt encrypted)
   -  Port 2377 TCP      - for cluster management communications
+
+# Standard application ports  #
+
+**Joe Rice Architect - Sites and APIs**
+
+| Application | Exposed Port | Domain Name             | Description |
+| ----------- | ------------ | ----------------------- | ----------- |
+| JArch Web UI  | 8080       | www.joericearchitect.com      | Main Web Site |
+| JArch Blog UI | 8081       | blog.joericearchitect.com     | Blog |
+| JArch Web API | 8082       | webapi.joericearchitect.com   | Main Web Site |
+
+**Joe Rice Architect - Admin, Infrastructure, and Managmement**
+
+| Application | Exposed Port | Domain Name             | Description |
+| ----------- | ------------ | ----------------------- | ----------- |
+| Build / CI CD Tool        | 8070       | build.joericearchitect.com      | CI / CD pipeline / build |
+| Load Generators           | 8071       | load.joericearchitect.com       | Load Generator Boxes for performance testing |
+| Dashboard and Metrics App | 8072       | dashboard.joericearchitect.com  | Dashboard and metrics site            |
+| Private Docker Registry   | 8073       | docker.joericearchitect.com     |             |
+| Maven / Gradle Repo       | 8074       | maven.joericearchitect.com      |             |
+| Splunk                    | 8074       | splunk.joericearchitect.com     |             |
+| Kibana                    | 8074       | kibana.joericearchitect.com     |             |

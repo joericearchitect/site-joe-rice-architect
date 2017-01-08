@@ -141,3 +141,47 @@ The reason is this:
 ```
 
 
+* Schedule a registry container
+
+```
+   docker service create \
+   --name jarch-infra-docker-registry \
+   --publish 8073:5000 \
+   --constraint 'node.labels.swarm-node-type == build' \
+   --label environment-flip="blue" \
+   --label application-name="jarch-infra-docker-registry" \
+   --label container-name="jarch-infra-docker-registry" \
+   registry:2
+
+```
+
+* Schedule a jrasite container
+
+```
+   docker service create \
+   --name jarch-site-web-static \
+   --publish 8080:8080 \
+   --replicas=3 \
+   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label environment-flip="blue" \
+   --label application-name="jarch-site-web-static" \
+   --label container-name="jarch-site-web-static" \
+   joericearchitect/jarch-site-web-static
+
+```
+
+* Schedule a jenkins container
+
+```
+   docker service create \
+   --name jarch-build-jenkins \
+   --publish 8070:8080 \
+   --replicas=3 \
+   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label environment-flip="blue" \
+   --label application-name="jarch-build-jenkins" \
+   --label container-name="jarch-build-jenkins" \
+   jenkins
+
+```
+

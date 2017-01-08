@@ -770,6 +770,47 @@ function setDocumentScrollTop(ypos)
       --label-add subnet-type=public \
       ip-10-0-4-156
 
+</code></pre> 
+<ul> 
+ <li>Schedule a registry container</li> 
+</ul> 
+<pre><code>   docker service create \
+   --name jarch-infra-docker-registry \
+   --publish 8073:5000 \
+   --constraint 'node.labels.swarm-node-type == build' \
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-infra-docker-registry&quot; \
+   --label container-name=&quot;jarch-infra-docker-registry&quot; \
+   registry:2
+
+</code></pre> 
+<ul> 
+ <li>Schedule a jrasite container</li> 
+</ul> 
+<pre><code>   docker service create \
+   --name jarch-site-web-static \
+   --publish 8080:8080 \
+   --replicas=3 \
+   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-site-web-static&quot; \
+   --label container-name=&quot;jarch-site-web-static&quot; \
+   joericearchitect/jarch-site-web-static
+
+</code></pre> 
+<ul> 
+ <li>Schedule a jenkins container</li> 
+</ul> 
+<pre><code>   docker service create \
+   --name jarch-build-jenkins \
+   --publish 8070:8080 \
+   --replicas=3 \
+   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-build-jenkins&quot; \
+   --label container-name=&quot;jarch-build-jenkins&quot; \
+   jenkins
+
 </code></pre>
 </body>
 </html>

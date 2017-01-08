@@ -20,4 +20,4 @@ docker build -t $JARCH_BLOG_WORDPRESS_IMAGE_NAME_LOCAL .
 # support for pushing images to repo when I set up the CI process with Jenkins
 # **************************************************************************************
 # docker tag $JARCH_BLOG_WORDPRESS_IMAGE_NAME_LOCAL $JARCH_BLOG_WORDPRESS_IMAGE_NAME_REPO
-#docker push $JARCH_BLOG_WORDPRESS_IMAGE_NAME_REPO
+docker push $JARCH_BLOG_WORDPRESS_IMAGE_NAME_REPO

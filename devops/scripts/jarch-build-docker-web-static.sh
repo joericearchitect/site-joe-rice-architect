@@ -19,5 +19,5 @@ docker build -t $JARCH_WEB_STATIC_IMAGE_NAME_LOCAL .
 # Commenting out the tagging and pushing image to ECR repo is soooo slow.  Will add
 # support for pushing images to repo when I set up the CI process with Jenkins
 # **************************************************************************************
-# docker tag $JARCH_WEB_STATIC_IMAGE_NAME_LOCAL $JARCH_WEB_STATIC_IMAGE_NAME_REPO
-#docker push $JARCH_WEB_STATIC_IMAGE_NAME_REPO
+#docker tag $JARCH_WEB_STATIC_IMAGE_NAME_LOCAL $JARCH_WEB_STATIC_IMAGE_NAME_REPO
+docker push $JARCH_WEB_STATIC_IMAGE_NAME_REPO
