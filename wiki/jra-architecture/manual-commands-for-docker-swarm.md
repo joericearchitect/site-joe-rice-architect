@@ -2,9 +2,15 @@
 
 ## Overview ##
 
-As of right now, 12/27/17, there are some manual steps that have to be done to set up the docker swarm cluster.
+As of right now, 12/27/16, there are some manual steps that have to be done to set up the docker swarm cluster.
 
-This page documents those manual steps.
+This page documents those manual steps....until it is all automated at some point in the future.
+
+As of today, 1/8/16, setting up docker swarm cluster is indeed automated!  The future is here.
+
+![And there was much rejoicing in the land](much-rejoicing.gif)
+
+Will continue adding commands in this wiki page as more gets automated.  1) to help capture them during script writing phase and 2) so they are available for future wiki and blog posts.
 
 ### What is automated ###
 
@@ -29,6 +35,16 @@ The reason is this:
   + the swarm creation is done as part of a terraform provision script
   + terraform has no way of capturing the output of a provision script in 1 resource and passing it into another resource
   + So...can use terraform to create the swarm and the first swarm manager.  But, can't use it to join other manager and worker nodes.
+
+*Update, 1/7/2017*
+
+* Docker Swarm Buildout is now completely automated.
+* Running int the problem with terraform turned out to be a good thing.
+  +  Terraform should only be used to be out infrastructure.  Not set them up or configure them.
+  +  Best practice is to use a provisioning tool for that.
+  +  And that's exactly what I did
+* Using Ansible to provision the swarm.  Ansible is the simplest and easiest of the config tools (chef, puhpet, etc).
+  +  After terraform build out the VPC and instances, it calls ansible script to configure the swarm.
 
 ## Commands ##
 
@@ -141,13 +157,45 @@ The reason is this:
 ```
 
 
+* Schedule a traefik container (traefik is a dynamic reverse-proxy)
+
+```
+   docker network create --driver=overlay traefik-net
+
+   docker service create \
+   --name jarch-infra-proxy-traefik \
+   --constraint=node.role==manager \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=8080 \
+   --label traefik.frontend.rule=Host:proxy.joericearchitect.com\
+   --label environment-flip="blue" \
+   --label application-name="jarch-infra-proxy-traefik" \
+   --label container-name="jarch-infra-proxy-traefik" \
+   --publish 80:80 \
+   --publish 8078:8080 \
+   --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+   --network traefik-net \
+   traefik:v1.1.0 \
+   --docker \
+   --docker.swarmmode \
+   --docker.domain=traefik \
+   --docker.watch \
+   --web \
+   --debug
+
+```
+
 * Schedule a registry container
 
 ```
    docker service create \
    --name jarch-infra-docker-registry \
    --publish 8073:5000 \
+   --network traefik-net \
    --constraint 'node.labels.swarm-node-type == build' \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=5000 \
+   --label traefik.frontend.rule=Host:docker.joericearchitect.com \
    --label environment-flip="blue" \
    --label application-name="jarch-infra-docker-registry" \
    --label container-name="jarch-infra-docker-registry" \
@@ -162,7 +210,11 @@ The reason is this:
    --name jarch-site-web-static \
    --publish 8080:8080 \
    --replicas=3 \
+   --network traefik-net \
    --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=8080 \
+   --label traefik.frontend.rule=Host:www.joericearchitect.com\
    --label environment-flip="blue" \
    --label application-name="jarch-site-web-static" \
    --label container-name="jarch-site-web-static" \
@@ -174,14 +226,50 @@ The reason is this:
 
 ```
    docker service create \
-   --name jarch-build-jenkins \
+   --name jarch-infra-build-jenkins \
    --publish 8070:8080 \
-   --replicas=3 \
-   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --replicas=1 \
+   --constraint 'node.labels.swarm-node-type == build' \
+   --network traefik-net \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=8080 \
+   --label traefik.frontend.rule=Host:build.joericearchitect.com\
    --label environment-flip="blue" \
-   --label application-name="jarch-build-jenkins" \
-   --label container-name="jarch-build-jenkins" \
+   --label application-name="jarch-infra-build-jenkins" \
+   --label container-name="jarch-infra-build-jenkins" \
    jenkins
 
 ```
 
+* Schedule a Portainer container
+
+```
+docker service create \
+   --name jarch-infra-docker-ui-portainer \
+   --publish 8074:9000 \
+   --constraint 'node.role == manager' \
+   --network traefik-net \
+   --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=9000 \
+   --label traefik.frontend.rule=Host:dockerui.joericearchitect.com\
+   --label environment-flip="blue" \
+   --label application-name="jarch-infra-docker-ui-portainer" \
+   --label container-name="jarch-infra-docker-ui-portainer" \
+    portainer/portainer \
+    -H unix:///var/run/docker.sock
+
+```
+
+###Commands to set up replicated MySQL containers###
+
+Following this great blog from several nines to set it all up
+* http://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking
+
+
+* create a docker swarm overlay network
+
+```
+docker network create --driver overlay jarch-wordpress-network
+
+```

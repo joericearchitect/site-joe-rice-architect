@@ -641,8 +641,11 @@ function setDocumentScrollTop(ypos)
 <body class="markdown-body">
 <h1> <a id="manual-commands-used-for-jra-docker-swarm" class="anchor" href="#manual-commands-used-for-jra-docker-swarm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Manual Commands used for JRA Docker Swarm</h1> 
 <h2> <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overview</h2> 
-<p>As of right now, 12/27/17, there are some manual steps that have to be done to set up the docker swarm cluster.</p> 
-<p>This page documents those manual steps.</p> 
+<p>As of right now, 12/27/16, there are some manual steps that have to be done to set up the docker swarm cluster.</p> 
+<p>This page documents those manual steps....until it is all automated at some point in the future.</p> 
+<p>As of today, 1/8/16, setting up docker swarm cluster is indeed automated! The future is here.</p> 
+<p><a href="much-rejoicing.gif" target="_blank"><img src="much-rejoicing.gif" alt="And there was much rejoicing in the land" style="max-width:100%;" /></a></p> 
+<p>Will continue adding commands in this wiki page as more gets automated. 1) to help capture them during script writing phase and 2) so they are available for future wiki and blog posts.</p> 
 <h3> <a id="what-is-automated" class="anchor" href="#what-is-automated" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is automated</h3> 
 <p>Terraform will create all the AWS infrastructure. Including</p> 
 <ul> 
@@ -668,6 +671,20 @@ function setDocumentScrollTop(ypos)
    <li>the swarm creation is done as part of a terraform provision script</li> 
    <li>terraform has no way of capturing the output of a provision script in 1 resource and passing it into another resource</li> 
    <li>So...can use terraform to create the swarm and the first swarm manager. But, can't use it to join other manager and worker nodes.</li> 
+  </ul> </li> 
+</ul> 
+<p><em>Update, 1/7/2017</em></p> 
+<ul> 
+ <li>Docker Swarm Buildout is now completely automated.</li> 
+ <li>Running int the problem with terraform turned out to be a good thing. 
+  <ul> 
+   <li> Terraform should only be used to be out infrastructure. Not set them up or configure them.</li> 
+   <li> Best practice is to use a provisioning tool for that.</li> 
+   <li> And that's exactly what I did</li> 
+  </ul> </li> 
+ <li>Using Ansible to provision the swarm. Ansible is the simplest and easiest of the config tools (chef, puhpet, etc). 
+  <ul> 
+   <li> After terraform build out the VPC and instances, it calls ansible script to configure the swarm.</li> 
   </ul> </li> 
 </ul> 
 <h2> <a id="commands" class="anchor" href="#commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands</h2> 
@@ -772,12 +789,43 @@ function setDocumentScrollTop(ypos)
 
 </code></pre> 
 <ul> 
+ <li>Schedule a traefik container (traefik is a dynamic reverse-proxy)</li> 
+</ul> 
+<pre><code>   docker network create --driver=overlay traefik-net
+
+   docker service create \
+   --name jarch-infra-proxy-traefik \
+   --constraint=node.role==manager \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=8080 \
+   --label traefik.frontend.rule=Host:proxy.joericearchitect.com\
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-infra-proxy-traefik&quot; \
+   --label container-name=&quot;jarch-infra-proxy-traefik&quot; \
+   --publish 80:80 \
+   --publish 8078:8080 \
+   --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+   --network traefik-net \
+   traefik:v1.1.0 \
+   --docker \
+   --docker.swarmmode \
+   --docker.domain=traefik \
+   --docker.watch \
+   --web \
+   --debug
+
+</code></pre> 
+<ul> 
  <li>Schedule a registry container</li> 
 </ul> 
 <pre><code>   docker service create \
    --name jarch-infra-docker-registry \
    --publish 8073:5000 \
+   --network traefik-net \
    --constraint 'node.labels.swarm-node-type == build' \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=5000 \
+   --label traefik.frontend.rule=Host:docker.joericearchitect.com \
    --label environment-flip=&quot;blue&quot; \
    --label application-name=&quot;jarch-infra-docker-registry&quot; \
    --label container-name=&quot;jarch-infra-docker-registry&quot; \
@@ -791,7 +839,11 @@ function setDocumentScrollTop(ypos)
    --name jarch-site-web-static \
    --publish 8080:8080 \
    --replicas=3 \
+   --network traefik-net \
    --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=8080 \
+   --label traefik.frontend.rule=Host:www.joericearchitect.com\
    --label environment-flip=&quot;blue&quot; \
    --label application-name=&quot;jarch-site-web-static&quot; \
    --label container-name=&quot;jarch-site-web-static&quot; \
@@ -802,14 +854,46 @@ function setDocumentScrollTop(ypos)
  <li>Schedule a jenkins container</li> 
 </ul> 
 <pre><code>   docker service create \
-   --name jarch-build-jenkins \
+   --name jarch-infra-build-jenkins \
    --publish 8070:8080 \
-   --replicas=3 \
-   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --replicas=1 \
+   --constraint 'node.labels.swarm-node-type == build' \
+   --network traefik-net \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=8080 \
+   --label traefik.frontend.rule=Host:build.joericearchitect.com\
    --label environment-flip=&quot;blue&quot; \
-   --label application-name=&quot;jarch-build-jenkins&quot; \
-   --label container-name=&quot;jarch-build-jenkins&quot; \
+   --label application-name=&quot;jarch-infra-build-jenkins&quot; \
+   --label container-name=&quot;jarch-infra-build-jenkins&quot; \
    jenkins
+
+</code></pre> 
+<ul> 
+ <li>Schedule a Portainer container</li> 
+</ul> 
+<pre><code>docker service create \
+   --name jarch-infra-docker-ui-portainer \
+   --publish 8074:9000 \
+   --constraint 'node.role == manager' \
+   --network traefik-net \
+   --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=9000 \
+   --label traefik.frontend.rule=Host:dockerui.joericearchitect.com\
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-infra-docker-ui-portainer&quot; \
+   --label container-name=&quot;jarch-infra-docker-ui-portainer&quot; \
+    portainer/portainer \
+    -H unix:///var/run/docker.sock
+
+</code></pre> 
+<h3> <a id="commands-to-set-up-replicated-mysql-containers" class="anchor" href="#commands-to-set-up-replicated-mysql-containers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands to set up replicated MySQL containers</h3> 
+<p>Following this great blog from several nines to set it all up</p> 
+<ul> 
+ <li><p><a href="http://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking">http://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking</a></p></li> 
+ <li><p>create a docker swarm overlay network</p></li> 
+</ul> 
+<pre><code>docker network create --driver overlay jarch-wordpress-network
 
 </code></pre>
 </body>

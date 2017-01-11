@@ -181,6 +181,9 @@ This page is a free-form collection of notes and links as I start to build out t
 | Load Generators           | 8071       | load.joericearchitect.com       | Load Generator Boxes for performance testing |
 | Dashboard and Metrics App | 8072       | dashboard.joericearchitect.com  | Dashboard and metrics site            |
 | Private Docker Registry   | 8073       | docker.joericearchitect.com     |             |
-| Maven / Gradle Repo       | 8074       | maven.joericearchitect.com      |             |
-| Splunk                    | 8074       | splunk.joericearchitect.com     |             |
-| Kibana                    | 8074       | kibana.joericearchitect.com     |             |
+| Portainer (UI for docker) | 8074       | dockerui.joericearchitect.com   |             |
+| Maven / Gradle Repo       | 8075       | maven.joericearchitect.com      |             |
+| Splunk                    | 8076       | splunk.joericearchitect.com     |             |
+| Kibana                    | 8077       | kibana.joericearchitect.com     |             |
+| Traefik UI                | 8078       | proxy.joericearchitect.com      |             |
+
