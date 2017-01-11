@@ -303,10 +303,12 @@
 * https://www.youtube.com/watch?v=sUcK9iOQ5ic&feature=youtu.be
 * https://www.youtube.com/watch?v=G0BBCZoXZ68
 * https://www.blazemeter.com/blog/running-jmeter-test-jenkins-pipeline-tutorial
+* https://www.blazemeter.com/blog/continuous-integration-101-how-run-jmeter-jenkins
 
 ##JMeter##
 * https://gist.github.com/hhcordero/abd1dcaf6654cfe51d0b
 * https://www.blazemeter.com/blog/running-jmeter-test-jenkins-pipeline-tutorial
+* https://www.blazemeter.com/blog/continuous-integration-101-how-run-jmeter-jenkins
 
 ##Configuration Management##
 * https://www.digitalocean.com/community/tutorials/an-introduction-to-configuration-management
@@ -327,3 +329,10 @@
 * http://portainer.io/
 * https://blog.hypriot.com/post/new-docker-ui-portainer/
 * https://github.com/kevana/ui-for-docker
+
+
+##MySql##
+* http://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking
+
+##Logging##
+* https://sematext.com/blog/2016/09/19/docker-swarm-mode-full-cluster-monitoring-logging-with-1-command/
