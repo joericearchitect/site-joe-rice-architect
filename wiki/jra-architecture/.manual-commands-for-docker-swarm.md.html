@@ -947,11 +947,29 @@ function setDocumentScrollTop(ypos)
    --env XTRABACKUP_PASSWORD=mypassword \
    --env CLUSTER_NAME=jarch-blog-wordpress-mysql-galera \
 perconalab/percona-xtradb-cluster:5.6
-
-* schedule JArch Word Press Containers
-
 </code></pre> 
-<p>docker service create \ --name jarch-blog-wordpress-ui \ --publish 8081:80 \ --replicas=3 \ --network traefik-net \ --network jarch-blog-wordpress-network \ --constraint 'node.labels.swarm-node-type == app-ui-web' \ --label traefik.docker.network=traefik-net \ --label traefik.port=80 \ --label traefik.frontend.rule=Host:blog.joericearchitect.com \ --label environment-flip=&quot;blue&quot; \ --label application-name=&quot;jarch-blog-wordpress-ui&quot; \ --label container-name=&quot;jarch-blog-wordpress-ui&quot; \ --env WORDPRESS_DB_HOST=jarch-blog-wordpress-mysql-galera:3306 \ --env WORDPRESS_DB_USER=root \ --env WORDPRESS_DB_PASSWORD=mypassword \ joericearchitect/jarch-blog-wordpress-ui</p> 
-<pre><code></code></pre>
+<ul> 
+ <li>schedule JArch Word Press Containers</li> 
+</ul> 
+<pre><code>docker service create \
+   --name jarch-blog-wordpress-ui \
+   --publish 8081:80 \
+   --replicas=3 \
+   --network traefik-net \
+   --network jarch-blog-wordpress-network \
+   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=80 \
+   --label traefik.frontend.rule=Host:blog.joericearchitect.com \
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-blog-wordpress-ui&quot; \
+   --label container-name=&quot;jarch-blog-wordpress-ui&quot; \
+   --env WORDPRESS_DB_HOST=jarch-blog-wordpress-mysql-galera:3306 \
+   --env WORDPRESS_DB_USER=root \
+   --env WORDPRESS_DB_PASSWORD=mypassword \
+   joericearchitect/jarch-blog-wordpress-ui
+
+
+</code></pre>
 </body>
 </html>

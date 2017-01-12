@@ -330,6 +330,7 @@ docker service create \
    --env XTRABACKUP_PASSWORD=mypassword \
    --env CLUSTER_NAME=jarch-blog-wordpress-mysql-galera \
 perconalab/percona-xtradb-cluster:5.6
+```
 
 * schedule JArch Word Press Containers
 
