@@ -165,8 +165,8 @@ The reason is this:
 
    docker service create \
    --name jarch-infra-proxy-traefik \
-   --constraint=node.role==manager \
-   --constraint 'node.labels.failure-zone == us-east-1-az-1' \
+   --constraint 'node.role == manager' \
+   --constraint 'node.labels.com.jra.failure-zone == us-east-1-az-1' \
    --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=8080 \
    --label traefik.frontend.rule=Host:proxy.joericearchitect.com\
@@ -195,7 +195,7 @@ The reason is this:
    --network jarch-proxy-traefik-network \
    --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/docker-registry/data,dst=/var/lib/registry \
    --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/docker-registry/certs,dst=/certs \
-   --constraint 'node.labels.swarm-node-type == build' \
+   --constraint 'node.labels.com.jra.swarm-node-type == build' \
    --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=5000 \
    --label traefik.frontend.rule=Host:docker.joericearchitect.com \
@@ -213,7 +213,7 @@ The reason is this:
    --name jarch-infra-build-jenkins \
    --publish 8180:8080 \
    --replicas=1 \
-   --constraint 'node.labels.swarm-node-type == build' \
+   --constraint 'node.labels.com.jra.swarm-node-type == build' \
    --network jarch-proxy-traefik-network \
    --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home,dst=/var/jenkins_home \
    --label traefik.docker.network=jarch-proxy-traefik-network \
@@ -233,7 +233,7 @@ docker service create \
    --name jarch-infra-docker-ui-portainer \
    --publish 8184:9000 \
    --constraint 'node.role == manager' \
-   --constraint 'node.labels.failure-zone == us-east-1-az-2' \
+   --constraint 'node.labels.com.jra.failure-zone == us-east-1-az-2' \
    --network jarch-proxy-traefik-network \
    --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
    --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/docker-ui-portainer/data,dst=/data \
@@ -258,7 +258,7 @@ docker service create \
    --publish 8080:8080 \
    --replicas=3 \
    --network jarch-proxy-traefik-network \
-   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --constraint 'node.labels.com.jra.swarm-node-type == app-ui-web' \
    --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=8080 \
    --label traefik.frontend.rule=Host:www.joericearchitect.com\
@@ -295,7 +295,7 @@ curl -w "\n" 'https://discovery.etcd.io/new?size=1'
 docker service create \
    --name jarch-blog-wordpress-mysql-etcd \
    --replicas 1 \
-   --constraint 'node.labels.swarm-node-type == app-persistence' \
+   --constraint 'node.labels.com.jra.swarm-node-type == app-persistence' \
    --label environment-flip="blue" \
    --label application-name="jarch-blog-wordpress-mysql-etcd" \
    --label container-name="jarch-blog-wordpress-mysql-etcd" \
@@ -327,7 +327,7 @@ docker service inspect jarch-blog-wordpress-mysql-etcd -f "{{ .Endpoint.VirtualI
 docker service create \
    --name jarch-blog-wordpress-mysql-galera \
    --replicas 3 \
-   --constraint 'node.labels.swarm-node-type == app-persistence' \
+   --constraint 'node.labels.com.jra.swarm-node-type == app-persistence' \
    --label environment-flip="blue" \
    --label application-name="jarch-blog-wordpress-mysql-galera" \
    --label container-name="jarch-blog-wordpress-mysql-galera" \
@@ -349,7 +349,7 @@ docker service create \
    --replicas=3 \
    --network jarch-proxy-traefik-network \
    --network jarch-blog-wordpress-network \
-   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --constraint 'node.labels.com.jra.swarm-node-type == app-ui-web' \
    --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=80 \
    --label traefik.frontend.rule=Host:blog.joericearchitect.com \

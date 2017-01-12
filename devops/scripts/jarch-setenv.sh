@@ -7,6 +7,8 @@
 #    Uses the Dockerfile in this same git repo
 # *********************************************************************************
 
+export JRA_BUILD_PRIVATE_KEY_FILE='/home/vagrant/share/aws-keys/jra-build.pem'
+
 export SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 export JARCH_GIT_PROJECT_ROOT=$SCRIPTS_DIR/../..
@@ -17,13 +19,20 @@ export JARCH_BLOG_WORDPRESS_DEV_APP_CODE_DIR=$JARCH_BLOG_WORDPRESS_APP_CODE_DIR/
 export JARCH_BLOG_DRUPAL_APP_CODE_DIR=$JARCH_APPS_DIR/blog-drupal
 export JARCH_BLOG_DRUPAL_DEV_APP_CODE_DIR=$JARCH_APPS_DIR/blog-drupal
 
+export JARCH_DEVOPS_HOME_DIR=$JARCH_GIT_PROJECT_ROOT/devops
+
+export JARCH_DEPLOYMENT_HOME_DIR=$JARCH_DEVOPS_HOME_DIR/deployment
+export JARCH_DEPLOYMENT_ANSIBLE_DIR=$JARCH_DEPLOYMENT_HOME_DIR/ansible
+
 export SHARED_INFRA_HOME_DIR=$SCRIPTS_DIR/../../../shared-infra
 
 export INFRA_MODULES_HOME_DIR=$SHARED_INFRA_HOME_DIR/infra-modules
+export INFRA_ENVIRONMENT_HOME_DIR=$SHARED_INFRA_HOME_DIR/environments
 export INFRA_SCRIPTS_HOME_DIR=$SHARED_INFRA_HOME_DIR/scripts
 export INFRA_SCRIPTS_DOCKER_DIR=$INFRA_SCRIPTS_HOME_DIR/docker
 
 export INFRA_NGINX_PROXY_APP_DIR=$INFRA_MODULES_HOME_DIR/nginx-proxy
+export INFRA_ANSIBLE_DIR=$INFRA_ENVIRONMENT_HOME_DIR/ansible
 
 export MACHINE_NAME_SITE=jarch-web
 export MACHINE_NAME_ADMIN=jarch-admin
