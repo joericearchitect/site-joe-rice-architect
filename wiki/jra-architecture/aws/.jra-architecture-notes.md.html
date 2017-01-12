@@ -997,6 +997,17 @@ function setDocumentScrollTop(ypos)
        <li>/var/lib/registry</li> 
       </ul> </li> 
     </ul> </li> 
+   <li>certs 
+    <ul> 
+     <li>Host 
+      <ul> 
+       <li>/usr/local/jra/docker-data-volumes/jra-infra/docker-registry/certs</li> 
+      </ul> </li> 
+     <li>Container 
+      <ul> 
+       <li>/certs</li> 
+      </ul> </li> 
+    </ul> </li> 
   </ul> </li> 
  <li> <p>Blog - WordPress - MySql</p> 
   <ul> 
@@ -1028,6 +1039,41 @@ function setDocumentScrollTop(ypos)
     </ul> </li> 
   </ul> </li> 
 </ul> 
-<p><strong>Standard Data Volumes</strong> x</p>
+<p><strong>Directories to create for each node type</strong></p> 
+<ul> 
+ <li>app-persistence 
+  <ul> 
+   <li>/usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf</li> 
+   <li>/usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data</li> 
+  </ul> </li> 
+</ul> 
+<pre><code>sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+</code></pre> 
+<ul> 
+ <li>swarm manager</li> 
+</ul> 
+<pre><code>sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/docker-ui-portainer/data
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+</code></pre> 
+<ul> 
+ <li>management (for now all management stuff is on &quot;build&quot; nodes)</li> 
+</ul> 
+<pre><code>sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/docker-registry/data
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/docker-registry/certs
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+</code></pre> 
+<ul> 
+ <li>build</li> 
+</ul> 
+<p>sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home</p> 
+<p>sudo chmod -R 777 /usr/local/jra/docker-data-volumes</p> 
+<pre><code>**Standard Data Volumes**
+
+</code></pre>
 </body>
 </html>

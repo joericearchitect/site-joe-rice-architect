@@ -233,6 +233,11 @@ This page is a free-form collection of notes and links as I start to build out t
       - /usr/local/jra/docker-data-volumes/jra-infra/docker-registry/data
     + Container
       - /var/lib/registry
+  + certs
+    + Host
+      - /usr/local/jra/docker-data-volumes/jra-infra/docker-registry/certs
+    + Container
+      - /certs
 
 * Blog - WordPress - MySql
   + Conf
@@ -248,5 +253,41 @@ This page is a free-form collection of notes and links as I start to build out t
   + User
     + jenkins (uid 1000)
 
+**Directories to create for each node type**
+
+* app-persistence
+  - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
+  - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data
+
+```
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+```
+
+* swarm manager
+
+```
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/docker-ui-portainer/data
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+```
+
+* management (for now all management stuff is on "build" nodes)
+
+```
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/docker-registry/data
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/docker-registry/certs
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+```
+
+* build
+
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+```
 **Standard Data Volumes**
-x
+
