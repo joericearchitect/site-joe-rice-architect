@@ -285,9 +285,11 @@ sudo chmod -R 777 /usr/local/jra/docker-data-volumes
 
 * build
 
+```
 sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home
 
 sudo chmod -R 777 /usr/local/jra/docker-data-volumes
 ```
+
 **Standard Data Volumes**
 
