@@ -190,18 +190,63 @@ This page is a free-form collection of notes and links as I start to build out t
 
 # Standard Data Volumes and directories #
 
-**Standard Data Volumes**
-
 **Standard Directories in Data Volumes**
 
-* /etc/docker-data-volumes
+* /usr/local/jra/docker-data-volumes
   + jra-site
     * site
     * blog-wp
       + etcd
       + mysql
+        * conf
+        * data
   + jra-infra
     * docker-ui-portainer
+      + data
     * proxy-traefik
-  + minethecatalog
+    * build-jenkins
+      + home
+    * docker-registry
+      + data
+  + mta-app
+    * site
 
+**Standard Binding Mounts**
+
+* Infra - Portainer
+  + Data
+    + Host
+      - /usr/local/jra/docker-data-volumes/jra-infra/docker-ui-portainer/data
+    + Container
+      - /data
+
+* Infra - Jenkins
+  + Home
+    + Host
+      - /usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home
+    + Container
+      - /var/jenkins_home
+
+* Infra - Registry (NOTE:  switch to s3 so we can replicate the service.  Then, remove this mount)
+  + data
+    + Host
+      - /usr/local/jra/docker-data-volumes/jra-infra/docker-registry/data
+    + Container
+      - /var/lib/registry
+
+* Blog - WordPress - MySql
+  + Conf
+    + Host
+      - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
+    + Container
+      - /etc/mysql/conf.d
+  + Data
+    + Host
+      - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data
+    + Container
+      - /var/lib/mysql
+  + User
+    + jenkins (uid 1000)
+
+**Standard Data Volumes**
+x

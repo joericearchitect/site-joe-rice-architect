@@ -915,10 +915,9 @@ function setDocumentScrollTop(ypos)
  </tbody> 
 </table> 
 <h1> <a id="standard-data-volumes-and-directories" class="anchor" href="#standard-data-volumes-and-directories" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Standard Data Volumes and directories</h1> 
-<p><strong>Standard Data Volumes</strong></p> 
 <p><strong>Standard Directories in Data Volumes</strong></p> 
 <ul> 
- <li>/etc/docker-data-volumes 
+ <li>/usr/local/jra/docker-data-volumes 
   <ul> 
    <li>jra-site 
     <ul> 
@@ -926,16 +925,109 @@ function setDocumentScrollTop(ypos)
      <li>blog-wp 
       <ul> 
        <li>etcd</li> 
-       <li>mysql</li> 
+       <li>mysql 
+        <ul> 
+         <li>conf</li> 
+         <li>data</li> 
+        </ul> </li> 
       </ul> </li> 
     </ul> </li> 
    <li>jra-infra 
     <ul> 
-     <li>docker-ui-portainer</li> 
+     <li>docker-ui-portainer 
+      <ul> 
+       <li>data</li> 
+      </ul> </li> 
      <li>proxy-traefik</li> 
+     <li>build-jenkins 
+      <ul> 
+       <li>home</li> 
+      </ul> </li> 
+     <li>docker-registry 
+      <ul> 
+       <li>data</li> 
+      </ul> </li> 
     </ul> </li> 
-   <li>minethecatalog</li> 
+   <li>mta-app 
+    <ul> 
+     <li>site</li> 
+    </ul> </li> 
   </ul> </li> 
-</ul>
+</ul> 
+<p><strong>Standard Binding Mounts</strong></p> 
+<ul> 
+ <li> <p>Infra - Portainer</p> 
+  <ul> 
+   <li>Data 
+    <ul> 
+     <li>Host 
+      <ul> 
+       <li>/usr/local/jra/docker-data-volumes/jra-infra/docker-ui-portainer/data</li> 
+      </ul> </li> 
+     <li>Container 
+      <ul> 
+       <li>/data</li> 
+      </ul> </li> 
+    </ul> </li> 
+  </ul> </li> 
+ <li> <p>Infra - Jenkins</p> 
+  <ul> 
+   <li>Home 
+    <ul> 
+     <li>Host 
+      <ul> 
+       <li>/usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home</li> 
+      </ul> </li> 
+     <li>Container 
+      <ul> 
+       <li>/var/jenkins_home</li> 
+      </ul> </li> 
+    </ul> </li> 
+  </ul> </li> 
+ <li> <p>Infra - Registry (NOTE: switch to s3 so we can replicate the service. Then, remove this mount)</p> 
+  <ul> 
+   <li>data 
+    <ul> 
+     <li>Host 
+      <ul> 
+       <li>/usr/local/jra/docker-data-volumes/jra-infra/docker-registry/data</li> 
+      </ul> </li> 
+     <li>Container 
+      <ul> 
+       <li>/var/lib/registry</li> 
+      </ul> </li> 
+    </ul> </li> 
+  </ul> </li> 
+ <li> <p>Blog - WordPress - MySql</p> 
+  <ul> 
+   <li>Conf 
+    <ul> 
+     <li>Host 
+      <ul> 
+       <li>/usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf</li> 
+      </ul> </li> 
+     <li>Container 
+      <ul> 
+       <li>/etc/mysql/conf.d</li> 
+      </ul> </li> 
+    </ul> </li> 
+   <li>Data 
+    <ul> 
+     <li>Host 
+      <ul> 
+       <li>/usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data</li> 
+      </ul> </li> 
+     <li>Container 
+      <ul> 
+       <li>/var/lib/mysql</li> 
+      </ul> </li> 
+    </ul> </li> 
+   <li>User 
+    <ul> 
+     <li>jenkins (uid 1000)</li> 
+    </ul> </li> 
+  </ul> </li> 
+</ul> 
+<p><strong>Standard Data Volumes</strong> x</p>
 </body>
 </html>

@@ -328,7 +328,7 @@ docker service create \
    --env MYSQL_ROOT_PASSWORD=mypassword \
    --env DISCOVERY_SERVICE=<VIRTUAL_IP_OF_ETCD_IN_SECOND_NETWORK_FROM_PREVIOUS_COMMAND>:2379 \
    --env XTRABACKUP_PASSWORD=mypassword \
-   --env CLUSTER_NAME=jarch-blog-wordpress-mysql-galera \
+   --env CLUSTER_NAME=galera \
 perconalab/percona-xtradb-cluster:5.6
 ```
 
