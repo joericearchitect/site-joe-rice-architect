@@ -172,7 +172,7 @@ The reason is this:
    --label application-name="jarch-infra-proxy-traefik" \
    --label container-name="jarch-infra-proxy-traefik" \
    --publish 80:80 \
-   --publish 8078:8080 \
+   --publish 8188:8080 \
    --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
    --network traefik-net \
    traefik:v1.1.0 \
@@ -180,8 +180,7 @@ The reason is this:
    --docker.swarmmode \
    --docker.domain=traefik \
    --docker.watch \
-   --web \
-   --debug
+   --web
 
 ```
 
@@ -190,7 +189,7 @@ The reason is this:
 ```
    docker service create \
    --name jarch-infra-docker-registry \
-   --publish 8073:5000 \
+   --publish 8183:5000 \
    --network traefik-net \
    --constraint 'node.labels.swarm-node-type == build' \
    --label traefik.docker.network=traefik-net \
@@ -227,7 +226,7 @@ The reason is this:
 ```
    docker service create \
    --name jarch-infra-build-jenkins \
-   --publish 8070:8080 \
+   --publish 8180:8080 \
    --replicas=1 \
    --constraint 'node.labels.swarm-node-type == build' \
    --network traefik-net \
@@ -246,7 +245,7 @@ The reason is this:
 ```
 docker service create \
    --name jarch-infra-docker-ui-portainer \
-   --publish 8074:9000 \
+   --publish 8184:9000 \
    --constraint 'node.role == manager' \
    --network traefik-net \
    --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
@@ -270,6 +269,85 @@ Following this great blog from several nines to set it all up
 * create a docker swarm overlay network
 
 ```
-docker network create --driver overlay jarch-wordpress-network
+docker network create --driver overlay jarch-blog-wordpress-network
+
+```
+
+* get etcd discovery url
+
+```
+curl -w "\n" 'https://discovery.etcd.io/new?size=1'
+
+```
+
+* schedule etcd service using the etcd discovery url generated above
+
+```
+docker service create \
+   --name jarch-blog-wordpress-mysql-etcd \
+   --replicas 1 \
+   --constraint 'node.labels.swarm-node-type == app-persistence' \
+   --label environment-flip="blue" \
+   --label application-name="jarch-blog-wordpress-mysql-etcd" \
+   --label container-name="jarch-blog-wordpress-mysql-etcd" \
+   --network jarch-blog-wordpress-network \
+   --publish 2379:2379 \
+   --publish 2380:2380 \
+   --publish 4001:4001 \
+   --publish 7001:7001 \
+   elcolio/etcd:latest \
+   -name etcd \
+   -discovery=<ETC_DISCOVERY_URL>
+
+```
+
+* Get the Virtual IPs of the etc instance.
+
+```
+docker service inspect jarch-blog-wordpress-mysql-etcd -f "{{ .Endpoint.VirtualIPs }}"
+
+```
+
+**Note:** This command will return 2 virtual IPs.  The 1st one is for the default bridge network.  The 2nd one is foe the overlay network.  We are going to use the 2nd one in the step below.
+
+* schedule Galera (Percona XtraDB Cluster) containers.  This is a clustered MySql instance.
+
+```
+docker service create \
+   --name jarch-blog-wordpress-mysql-galera \
+   --replicas 3 \
+   --constraint 'node.labels.swarm-node-type == app-persistence' \
+   --label environment-flip="blue" \
+   --label application-name="jarch-blog-wordpress-mysql-galera" \
+   --label container-name="jarch-blog-wordpress-mysql-galera" \
+   --publish 3306:3306 \
+   --network jarch-blog-wordpress-network \
+   --env MYSQL_ROOT_PASSWORD=mypassword \
+   --env DISCOVERY_SERVICE=<VIRTUAL_IP_OF_ETCD_IN_SECOND_NETWORK_FROM_PREVIOUS_COMMAND>:2379 \
+   --env XTRABACKUP_PASSWORD=mypassword \
+   --env CLUSTER_NAME=jarch-blog-wordpress-mysql-galera \
+perconalab/percona-xtradb-cluster:5.6
+
+* schedule JArch Word Press Containers
+
+```
+docker service create \
+   --name jarch-blog-wordpress-ui \
+   --publish 8081:80 \
+   --replicas=3 \
+   --network traefik-net \
+   --network jarch-blog-wordpress-network \
+   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=80 \
+   --label traefik.frontend.rule=Host:blog.joericearchitect.com \
+   --label environment-flip="blue" \
+   --label application-name="jarch-blog-wordpress-ui" \
+   --label container-name="jarch-blog-wordpress-ui" \
+   --env WORDPRESS_DB_HOST=jarch-blog-wordpress-mysql-galera:3306 \
+   --env WORDPRESS_DB_USER=root \
+   --env WORDPRESS_DB_PASSWORD=mypassword \
+   joericearchitect/jarch-blog-wordpress-ui
+
 
 ```

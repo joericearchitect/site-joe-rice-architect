@@ -803,7 +803,7 @@ function setDocumentScrollTop(ypos)
    --label application-name=&quot;jarch-infra-proxy-traefik&quot; \
    --label container-name=&quot;jarch-infra-proxy-traefik&quot; \
    --publish 80:80 \
-   --publish 8078:8080 \
+   --publish 8188:8080 \
    --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
    --network traefik-net \
    traefik:v1.1.0 \
@@ -811,8 +811,7 @@ function setDocumentScrollTop(ypos)
    --docker.swarmmode \
    --docker.domain=traefik \
    --docker.watch \
-   --web \
-   --debug
+   --web
 
 </code></pre> 
 <ul> 
@@ -820,7 +819,7 @@ function setDocumentScrollTop(ypos)
 </ul> 
 <pre><code>   docker service create \
    --name jarch-infra-docker-registry \
-   --publish 8073:5000 \
+   --publish 8183:5000 \
    --network traefik-net \
    --constraint 'node.labels.swarm-node-type == build' \
    --label traefik.docker.network=traefik-net \
@@ -855,7 +854,7 @@ function setDocumentScrollTop(ypos)
 </ul> 
 <pre><code>   docker service create \
    --name jarch-infra-build-jenkins \
-   --publish 8070:8080 \
+   --publish 8180:8080 \
    --replicas=1 \
    --constraint 'node.labels.swarm-node-type == build' \
    --network traefik-net \
@@ -873,7 +872,7 @@ function setDocumentScrollTop(ypos)
 </ul> 
 <pre><code>docker service create \
    --name jarch-infra-docker-ui-portainer \
-   --publish 8074:9000 \
+   --publish 8184:9000 \
    --constraint 'node.role == manager' \
    --network traefik-net \
    --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
@@ -893,8 +892,64 @@ function setDocumentScrollTop(ypos)
  <li><p><a href="http://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking">http://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking</a></p></li> 
  <li><p>create a docker swarm overlay network</p></li> 
 </ul> 
-<pre><code>docker network create --driver overlay jarch-wordpress-network
+<pre><code>docker network create --driver overlay jarch-blog-wordpress-network
 
-</code></pre>
+</code></pre> 
+<ul> 
+ <li>get etcd discovery url</li> 
+</ul> 
+<pre><code>curl -w &quot;\n&quot; 'https://discovery.etcd.io/new?size=1'
+
+</code></pre> 
+<ul> 
+ <li>schedule etcd service using the etcd discovery url generated above</li> 
+</ul> 
+<pre><code>docker service create \
+   --name jarch-blog-wordpress-mysql-etcd \
+   --replicas 1 \
+   --constraint 'node.labels.swarm-node-type == app-persistence' \
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-blog-wordpress-mysql-etcd&quot; \
+   --label container-name=&quot;jarch-blog-wordpress-mysql-etcd&quot; \
+   --network jarch-blog-wordpress-network \
+   --publish 2379:2379 \
+   --publish 2380:2380 \
+   --publish 4001:4001 \
+   --publish 7001:7001 \
+   elcolio/etcd:latest \
+   -name etcd \
+   -discovery=&lt;ETC_DISCOVERY_URL&gt;
+
+</code></pre> 
+<ul> 
+ <li>Get the Virtual IPs of the etc instance.</li> 
+</ul> 
+<pre><code>docker service inspect jarch-blog-wordpress-mysql-etcd -f &quot;{{ .Endpoint.VirtualIPs }}&quot;
+
+</code></pre> 
+<p><strong>Note:</strong> This command will return 2 virtual IPs. The 1st one is for the default bridge network. The 2nd one is foe the overlay network. We are going to use the 2nd one in the step below.</p> 
+<ul> 
+ <li>schedule Galera (Percona XtraDB Cluster) containers. This is a clustered MySql instance.</li> 
+</ul> 
+<pre><code>docker service create \
+   --name jarch-blog-wordpress-mysql-galera \
+   --replicas 3 \
+   --constraint 'node.labels.swarm-node-type == app-persistence' \
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-blog-wordpress-mysql-galera&quot; \
+   --label container-name=&quot;jarch-blog-wordpress-mysql-galera&quot; \
+   --publish 3306:3306 \
+   --network jarch-blog-wordpress-network \
+   --env MYSQL_ROOT_PASSWORD=mypassword \
+   --env DISCOVERY_SERVICE=&lt;VIRTUAL_IP_OF_ETCD_IN_SECOND_NETWORK_FROM_PREVIOUS_COMMAND&gt;:2379 \
+   --env XTRABACKUP_PASSWORD=mypassword \
+   --env CLUSTER_NAME=jarch-blog-wordpress-mysql-galera \
+perconalab/percona-xtradb-cluster:5.6
+
+* schedule JArch Word Press Containers
+
+</code></pre> 
+<p>docker service create \ --name jarch-blog-wordpress-ui \ --publish 8081:80 \ --replicas=3 \ --network traefik-net \ --network jarch-blog-wordpress-network \ --constraint 'node.labels.swarm-node-type == app-ui-web' \ --label traefik.docker.network=traefik-net \ --label traefik.port=80 \ --label traefik.frontend.rule=Host:blog.joericearchitect.com \ --label environment-flip=&quot;blue&quot; \ --label application-name=&quot;jarch-blog-wordpress-ui&quot; \ --label container-name=&quot;jarch-blog-wordpress-ui&quot; \ --env WORDPRESS_DB_HOST=jarch-blog-wordpress-mysql-galera:3306 \ --env WORDPRESS_DB_USER=root \ --env WORDPRESS_DB_PASSWORD=mypassword \ joericearchitect/jarch-blog-wordpress-ui</p> 
+<pre><code></code></pre>
 </body>
 </html>

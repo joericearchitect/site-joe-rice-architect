@@ -9,7 +9,8 @@
 
 export SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-export JARCH_APPS_DIR=$SCRIPTS_DIR/../../application
+export JARCH_GIT_PROJECT_ROOT=$SCRIPTS_DIR/../..
+export JARCH_APPS_DIR=$JARCH_GIT_PROJECT_ROOT/application
 export JARCH_STATIC_WEB_APP_CODE_DIR=$JARCH_APPS_DIR/web-static
 export JARCH_BLOG_WORDPRESS_APP_CODE_DIR=$JARCH_APPS_DIR/blog-wordpress
 export JARCH_BLOG_WORDPRESS_DEV_APP_CODE_DIR=$JARCH_BLOG_WORDPRESS_APP_CODE_DIR/dev-env
@@ -32,8 +33,8 @@ export JARCH_WEB_STATIC_IMAGE_NAME=jarch-site-web-static
 export JARCH_WEB_STATIC_CONTAINER_NAME=jarch-site-web-static
 
 export JARCH_BLOG_WORDPRESS_NAMESPACE=joericearchitect
-export JARCH_BLOG_WORDPRESS_IMAGE_NAME=jarch-blog-wordpress
-export JARCH_BLOG_WORDPRESS_CONTAINER_NAME=jarch-blog-wordpress
+export JARCH_BLOG_WORDPRESS_IMAGE_NAME=jarch-blog-wordpress-ui
+export JARCH_BLOG_WORDPRESS_CONTAINER_NAME=jarch-blog-wordpress-ui
 
 export ECR_REPO=193862077204.dkr.ecr.us-east-1.amazonaws.com/jarch
 
