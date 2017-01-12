@@ -161,12 +161,13 @@ The reason is this:
 * Schedule a traefik container (traefik is a dynamic reverse-proxy)
 
 ```
-   docker network create --driver=overlay traefik-net
+   docker network create --driver=overlay jarch-proxy-traefik-network
 
    docker service create \
    --name jarch-infra-proxy-traefik \
    --constraint=node.role==manager \
-   --label traefik.docker.network=traefik-net \
+   --constraint 'node.labels.failure-zone == us-east-1-az-1' \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=8080 \
    --label traefik.frontend.rule=Host:proxy.joericearchitect.com\
    --label environment-flip="blue" \
@@ -175,7 +176,7 @@ The reason is this:
    --publish 80:80 \
    --publish 8188:8080 \
    --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-   --network traefik-net \
+   --network jarch-proxy-traefik-network \
    traefik:v1.1.0 \
    --docker \
    --docker.swarmmode \
@@ -191,9 +192,11 @@ The reason is this:
    docker service create \
    --name jarch-infra-docker-registry \
    --publish 8183:5000 \
-   --network traefik-net \
+   --network jarch-proxy-traefik-network \
+   --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/docker-registry/data,dst=/var/lib/registry \
+   --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/docker-registry/certs,dst=/certs \
    --constraint 'node.labels.swarm-node-type == build' \
-   --label traefik.docker.network=traefik-net \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=5000 \
    --label traefik.frontend.rule=Host:docker.joericearchitect.com \
    --label environment-flip="blue" \
@@ -211,8 +214,9 @@ The reason is this:
    --publish 8180:8080 \
    --replicas=1 \
    --constraint 'node.labels.swarm-node-type == build' \
-   --network traefik-net \
-   --label traefik.docker.network=traefik-net \
+   --network jarch-proxy-traefik-network \
+   --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home,dst=/var/jenkins_home \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=8080 \
    --label traefik.frontend.rule=Host:build.joericearchitect.com\
    --label environment-flip="blue" \
@@ -229,9 +233,11 @@ docker service create \
    --name jarch-infra-docker-ui-portainer \
    --publish 8184:9000 \
    --constraint 'node.role == manager' \
-   --network traefik-net \
+   --constraint 'node.labels.failure-zone == us-east-1-az-2' \
+   --network jarch-proxy-traefik-network \
    --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-   --label traefik.docker.network=traefik-net \
+   --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/docker-ui-portainer/data,dst=/data \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=9000 \
    --label traefik.frontend.rule=Host:dockerui.joericearchitect.com\
    --label environment-flip="blue" \
@@ -251,9 +257,9 @@ docker service create \
    --name jarch-site-web-static \
    --publish 8080:8080 \
    --replicas=3 \
-   --network traefik-net \
+   --network jarch-proxy-traefik-network \
    --constraint 'node.labels.swarm-node-type == app-ui-web' \
-   --label traefik.docker.network=traefik-net \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=8080 \
    --label traefik.frontend.rule=Host:www.joericearchitect.com\
    --label environment-flip="blue" \
@@ -294,6 +300,8 @@ docker service create \
    --label application-name="jarch-blog-wordpress-mysql-etcd" \
    --label container-name="jarch-blog-wordpress-mysql-etcd" \
    --network jarch-blog-wordpress-network \
+   --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/docker-registry/data,dst=/var/lib/registry \
+   --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/docker-registry/certs,dst=/certs \
    --publish 2379:2379 \
    --publish 2380:2380 \
    --publish 4001:4001 \
@@ -339,10 +347,10 @@ docker service create \
    --name jarch-blog-wordpress-ui \
    --publish 8081:80 \
    --replicas=3 \
-   --network traefik-net \
+   --network jarch-proxy-traefik-network \
    --network jarch-blog-wordpress-network \
    --constraint 'node.labels.swarm-node-type == app-ui-web' \
-   --label traefik.docker.network=traefik-net \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=80 \
    --label traefik.frontend.rule=Host:blog.joericearchitect.com \
    --label environment-flip="blue" \
