@@ -22,7 +22,7 @@ git status
 echo .
 echo .
 echo ----------------------------------------------
-echo Adding wiki files...
+echo Adding site files...
 echo .
 echo    Command used:  git add -A .
 echo ----------------------------------------------
@@ -36,7 +36,7 @@ git status
 echo .
 echo .
 echo ----------------------------------------------
-echo committing wiki files...
+echo committing site files...
 echo .
 echo    Command used:  git commit -m $COMMIT_COMMENT
 echo ----------------------------------------------
@@ -51,7 +51,7 @@ git status
 echo .
 echo .
 echo ----------------------------------------------
-echo pushing wiki files to git...
+echo pushing site files to git...
 echo ----------------------------------------------
 git push origin master
 echo .
