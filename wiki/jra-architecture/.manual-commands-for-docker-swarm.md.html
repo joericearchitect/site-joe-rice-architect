@@ -788,6 +788,7 @@ function setDocumentScrollTop(ypos)
       ip-10-0-4-156
 
 </code></pre> 
+<h3> <a id="commands-to-deploy-infrastructure-apps-and-services" class="anchor" href="#commands-to-deploy-infrastructure-apps-and-services" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands to Deploy Infrastructure Apps and Services</h3> 
 <ul> 
  <li>Schedule a traefik container (traefik is a dynamic reverse-proxy)</li> 
 </ul> 
@@ -832,24 +833,6 @@ function setDocumentScrollTop(ypos)
 
 </code></pre> 
 <ul> 
- <li>Schedule a jrasite container</li> 
-</ul> 
-<pre><code>   docker service create \
-   --name jarch-site-web-static \
-   --publish 8080:8080 \
-   --replicas=3 \
-   --network traefik-net \
-   --constraint 'node.labels.swarm-node-type == app-ui-web' \
-   --label traefik.docker.network=traefik-net \
-   --label traefik.port=8080 \
-   --label traefik.frontend.rule=Host:www.joericearchitect.com\
-   --label environment-flip=&quot;blue&quot; \
-   --label application-name=&quot;jarch-site-web-static&quot; \
-   --label container-name=&quot;jarch-site-web-static&quot; \
-   joericearchitect/jarch-site-web-static
-
-</code></pre> 
-<ul> 
  <li>Schedule a jenkins container</li> 
 </ul> 
 <pre><code>   docker service create \
@@ -884,6 +867,25 @@ function setDocumentScrollTop(ypos)
    --label container-name=&quot;jarch-infra-docker-ui-portainer&quot; \
     portainer/portainer \
     -H unix:///var/run/docker.sock
+
+</code></pre> 
+<h3> <a id="commands-to-deploy-jarchitecture-site-and-services" class="anchor" href="#commands-to-deploy-jarchitecture-site-and-services" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands to Deploy JArchitecture Site and Services</h3> 
+<ul> 
+ <li>Schedule a jrasite container</li> 
+</ul> 
+<pre><code>   docker service create \
+   --name jarch-site-web-static \
+   --publish 8080:8080 \
+   --replicas=3 \
+   --network traefik-net \
+   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=8080 \
+   --label traefik.frontend.rule=Host:www.joericearchitect.com\
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-site-web-static&quot; \
+   --label container-name=&quot;jarch-site-web-static&quot; \
+   joericearchitect/jarch-site-web-static
 
 </code></pre> 
 <h3> <a id="commands-to-set-up-replicated-mysql-containers" class="anchor" href="#commands-to-set-up-replicated-mysql-containers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands to set up replicated MySQL containers</h3> 

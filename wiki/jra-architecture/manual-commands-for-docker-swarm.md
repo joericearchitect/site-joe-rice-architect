@@ -156,6 +156,7 @@ The reason is this:
 
 ```
 
+###Commands to Deploy Infrastructure Apps and Services###
 
 * Schedule a traefik container (traefik is a dynamic reverse-proxy)
 
@@ -202,25 +203,6 @@ The reason is this:
 
 ```
 
-* Schedule a jrasite container
-
-```
-   docker service create \
-   --name jarch-site-web-static \
-   --publish 8080:8080 \
-   --replicas=3 \
-   --network traefik-net \
-   --constraint 'node.labels.swarm-node-type == app-ui-web' \
-   --label traefik.docker.network=traefik-net \
-   --label traefik.port=8080 \
-   --label traefik.frontend.rule=Host:www.joericearchitect.com\
-   --label environment-flip="blue" \
-   --label application-name="jarch-site-web-static" \
-   --label container-name="jarch-site-web-static" \
-   joericearchitect/jarch-site-web-static
-
-```
-
 * Schedule a jenkins container
 
 ```
@@ -257,6 +239,27 @@ docker service create \
    --label container-name="jarch-infra-docker-ui-portainer" \
     portainer/portainer \
     -H unix:///var/run/docker.sock
+
+```
+
+###Commands to Deploy JArchitecture Site and Services###
+
+* Schedule a jrasite container
+
+```
+   docker service create \
+   --name jarch-site-web-static \
+   --publish 8080:8080 \
+   --replicas=3 \
+   --network traefik-net \
+   --constraint 'node.labels.swarm-node-type == app-ui-web' \
+   --label traefik.docker.network=traefik-net \
+   --label traefik.port=8080 \
+   --label traefik.frontend.rule=Host:www.joericearchitect.com\
+   --label environment-flip="blue" \
+   --label application-name="jarch-site-web-static" \
+   --label container-name="jarch-site-web-static" \
+   joericearchitect/jarch-site-web-static
 
 ```
 
