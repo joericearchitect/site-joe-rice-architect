@@ -6,6 +6,8 @@ As of right now, 12/27/16, there are some manual steps that have to be done to s
 
 This page documents those manual steps....until it is all automated at some point in the future.
 
+**Update, 1/8/2017**
+
 As of today, 1/8/16, setting up docker swarm cluster is indeed automated!  The future is here.
 
 ![And there was much rejoicing in the land](much-rejoicing.gif)
@@ -36,7 +38,7 @@ The reason is this:
   + terraform has no way of capturing the output of a provision script in 1 resource and passing it into another resource
   + So...can use terraform to create the swarm and the first swarm manager.  But, can't use it to join other manager and worker nodes.
 
-*Update, 1/7/2017*
+**Update, 1/7/2017**
 
 * Docker Swarm Buildout is now completely automated.
 * Running int the problem with terraform turned out to be a good thing.
@@ -47,6 +49,18 @@ The reason is this:
   +  After terraform build out the VPC and instances, it calls ansible script to configure the swarm.
 
 ## Commands ##
+
+**Update, 1/12/2017**
+
+Most commands listed in this section were the starting points for the scripts.
+They may now be out of date.  See the following script files for the source of truth for proper configuration of these commands:
+
+* Ansible script to provision the docker swarm, including setting up all manager and worker swarm nodes, adding labels, and the such.
+  -  https://github.com/joericearchitect/shared-infra/blob/master/environments/ansible/swarm.yml
+
+* Ansible script to deploy infra docker services
+  -  https://github.com/joericearchitect/shared-infra/blob/master/environments/ansible/deploy-infra-apps-services.yml
+
 
 **Commands run on the first Swarm Manager Nodes**
 

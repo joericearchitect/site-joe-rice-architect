@@ -643,6 +643,7 @@ function setDocumentScrollTop(ypos)
 <h2> <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overview</h2> 
 <p>As of right now, 12/27/16, there are some manual steps that have to be done to set up the docker swarm cluster.</p> 
 <p>This page documents those manual steps....until it is all automated at some point in the future.</p> 
+<p><strong>Update, 1/8/2017</strong></p> 
 <p>As of today, 1/8/16, setting up docker swarm cluster is indeed automated! The future is here.</p> 
 <p><a href="much-rejoicing.gif" target="_blank"><img src="much-rejoicing.gif" alt="And there was much rejoicing in the land" style="max-width:100%;" /></a></p> 
 <p>Will continue adding commands in this wiki page as more gets automated. 1) to help capture them during script writing phase and 2) so they are available for future wiki and blog posts.</p> 
@@ -673,7 +674,7 @@ function setDocumentScrollTop(ypos)
    <li>So...can use terraform to create the swarm and the first swarm manager. But, can't use it to join other manager and worker nodes.</li> 
   </ul> </li> 
 </ul> 
-<p><em>Update, 1/7/2017</em></p> 
+<p><strong>Update, 1/7/2017</strong></p> 
 <ul> 
  <li>Docker Swarm Buildout is now completely automated.</li> 
  <li>Running int the problem with terraform turned out to be a good thing. 
@@ -688,6 +689,18 @@ function setDocumentScrollTop(ypos)
   </ul> </li> 
 </ul> 
 <h2> <a id="commands" class="anchor" href="#commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands</h2> 
+<p><strong>Update, 1/12/2017</strong></p> 
+<p>Most commands listed in this section were the starting points for the scripts. They may now be out of date. See the following script files for the source of truth for proper configuration of these commands:</p> 
+<ul> 
+ <li> <p>Ansible script to provision the docker swarm, including setting up all manager and worker swarm nodes, adding labels, and the such.</p> 
+  <ul> 
+   <li> <a href="https://github.com/joericearchitect/shared-infra/blob/master/environments/ansible/swarm.yml">https://github.com/joericearchitect/shared-infra/blob/master/environments/ansible/swarm.yml</a> </li> 
+  </ul> </li> 
+ <li> <p>Ansible script to deploy infra docker services</p> 
+  <ul> 
+   <li> <a href="https://github.com/joericearchitect/shared-infra/blob/master/environments/ansible/deploy-infra-apps-services.yml">https://github.com/joericearchitect/shared-infra/blob/master/environments/ansible/deploy-infra-apps-services.yml</a> </li> 
+  </ul> </li> 
+</ul> 
 <p><strong>Commands run on the first Swarm Manager Nodes</strong></p> 
 <ul> 
  <li>Create the swarm and get the worker and manager tokens (run on first swarm node)</li> 
