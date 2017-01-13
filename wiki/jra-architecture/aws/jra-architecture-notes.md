@@ -256,7 +256,7 @@ This page is a free-form collection of notes and links as I start to build out t
   + User
     + jenkins (uid 1000)
 
-* App Blog - WordPress - Wordpress UI
+* App Blog - WordPress - Wordpress-UI
   + Conf
     + Host
       - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/data
