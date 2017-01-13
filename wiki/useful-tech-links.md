@@ -334,5 +334,11 @@
 ##MySql##
 * http://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking
 
-##Logging##
+##Logging & monitoring##
 * https://sematext.com/blog/2016/09/19/docker-swarm-mode-full-cluster-monitoring-logging-with-1-command/
+* https://github.com/google/cadvisor
+* https://dzone.com/articles/monitoring-docker-containers-with-elasticsearch-an
+
+##Useful Open Source Projects##
+* https://github.com/google/cadvisor
+*

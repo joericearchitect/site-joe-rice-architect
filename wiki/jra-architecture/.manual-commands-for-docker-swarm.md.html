@@ -855,12 +855,12 @@ function setDocumentScrollTop(ypos)
    --name jarch-infra-build-jenkins \
    --publish 8180:8080 \
    --replicas=1 \
-   --constraint 'node.labels.com.jra.swarm-node-type == build' \
+   --constraint 'node.labels.jra.swarm-node-type == build' \
    --network jarch-proxy-traefik-network \
    --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home,dst=/var/jenkins_home \
    --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=8080 \
-   --label traefik.frontend.rule=Host:build.joericearchitect.com\
+   --label traefik.frontend.rule=Host:latest.build.joericearchitect.com\
    --label environment-flip=&quot;blue&quot; \
    --label application-name=&quot;jarch-infra-build-jenkins&quot; \
    --label container-name=&quot;jarch-infra-build-jenkins&quot; \
@@ -991,6 +991,10 @@ perconalab/percona-xtradb-cluster:5.6
    joericearchitect/jarch-blog-wordpress-ui
 
 
-</code></pre>
+</code></pre> 
+<h3> <a id="commands-to-set-up-central-logging-servers" class="anchor" href="#commands-to-set-up-central-logging-servers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands to set up central logging servers</h3> 
+<ul> 
+ <li>Schedule elastic search container</li> 
+</ul>
 </body>
 </html>

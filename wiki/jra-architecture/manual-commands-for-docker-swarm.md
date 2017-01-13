@@ -227,12 +227,12 @@ They may now be out of date.  See the following script files for the source of t
    --name jarch-infra-build-jenkins \
    --publish 8180:8080 \
    --replicas=1 \
-   --constraint 'node.labels.com.jra.swarm-node-type == build' \
+   --constraint 'node.labels.jra.swarm-node-type == build' \
    --network jarch-proxy-traefik-network \
    --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home,dst=/var/jenkins_home \
    --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=8080 \
-   --label traefik.frontend.rule=Host:build.joericearchitect.com\
+   --label traefik.frontend.rule=Host:latest.build.joericearchitect.com\
    --label environment-flip="blue" \
    --label application-name="jarch-infra-build-jenkins" \
    --label container-name="jarch-infra-build-jenkins" \
@@ -377,3 +377,8 @@ docker service create \
 
 
 ```
+
+
+###Commands to set up central logging servers###
+
+* Schedule elastic search container
