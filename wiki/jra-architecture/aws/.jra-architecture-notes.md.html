@@ -930,6 +930,11 @@ function setDocumentScrollTop(ypos)
          <li>conf</li> 
          <li>data</li> 
         </ul> </li> 
+       <li>wordpress 
+        <ul> 
+         <li>data</li> 
+         <li>wp-content</li> 
+        </ul> </li> 
       </ul> </li> 
     </ul> </li> 
    <li>jra-infra 
@@ -1009,7 +1014,7 @@ function setDocumentScrollTop(ypos)
       </ul> </li> 
     </ul> </li> 
   </ul> </li> 
- <li> <p>Blog - WordPress - MySql</p> 
+ <li> <p>App Blog - WordPress - MySql</p> 
   <ul> 
    <li>Conf 
     <ul> 
@@ -1038,6 +1043,35 @@ function setDocumentScrollTop(ypos)
      <li>jenkins (uid 1000)</li> 
     </ul> </li> 
   </ul> </li> 
+ <li> <p>App Blog - WordPress - Wordpress UI</p> 
+  <ul> 
+   <li>Conf 
+    <ul> 
+     <li>Host 
+      <ul> 
+       <li>/usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/data</li> 
+      </ul> </li> 
+     <li>Container 
+      <ul> 
+       <li>/data</li> 
+      </ul> </li> 
+    </ul> </li> 
+   <li>Wp-content 
+    <ul> 
+     <li>Host 
+      <ul> 
+       <li>/usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/wp-content</li> 
+      </ul> </li> 
+     <li>Container 
+      <ul> 
+       <li>/var/www/html/wp-content</li> 
+      </ul> </li> 
+    </ul> </li> 
+   <li>User 
+    <ul> 
+     <li>jenkins (uid 1000)</li> 
+    </ul> </li> 
+  </ul> </li> 
 </ul> 
 <p><strong>Directories to create for each node type</strong></p> 
 <ul> 
@@ -1049,6 +1083,18 @@ function setDocumentScrollTop(ypos)
 </ul> 
 <pre><code>sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
 sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+</code></pre> 
+<ul> 
+ <li>app-UI 
+  <ul> 
+   <li>/usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/data</li> 
+   <li>/usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/wp-content</li> 
+  </ul> </li> 
+</ul> 
+<pre><code>sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/data
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/wp-content
 
 sudo chmod -R 777 /usr/local/jra/docker-data-volumes
 </code></pre> 

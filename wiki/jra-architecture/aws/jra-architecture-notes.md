@@ -200,6 +200,9 @@ This page is a free-form collection of notes and links as I start to build out t
       + mysql
         * conf
         * data
+      + wordpress
+        * data
+        * wp-content
   + jra-infra
     * docker-ui-portainer
       + data
@@ -239,7 +242,7 @@ This page is a free-form collection of notes and links as I start to build out t
     + Container
       - /certs
 
-* Blog - WordPress - MySql
+* App Blog - WordPress - MySql
   + Conf
     + Host
       - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
@@ -253,6 +256,20 @@ This page is a free-form collection of notes and links as I start to build out t
   + User
     + jenkins (uid 1000)
 
+* App Blog - WordPress - Wordpress UI
+  + Conf
+    + Host
+      - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/data
+    + Container
+      - /data
+  + Wp-content
+    + Host
+      - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/wp-content
+    + Container
+      - /var/www/html/wp-content
+  + User
+    + jenkins (uid 1000)
+
 **Directories to create for each node type**
 
 * app-persistence
@@ -262,6 +279,17 @@ This page is a free-form collection of notes and links as I start to build out t
 ```
 sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
 sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+```
+
+* app-UI
+  - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/data
+  - /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/wp-content
+
+```
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/data
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/wp-content
 
 sudo chmod -R 777 /usr/local/jra/docker-data-volumes
 ```
