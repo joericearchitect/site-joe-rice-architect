@@ -177,16 +177,17 @@ This page is a free-form collection of notes and links as I start to build out t
 
 | Application | Exposed Port | Domain Name             | Description |
 | ----------- | ------------ | ----------------------- | ----------- |
-| Build / CI CD Tool         | 8180       | build.joericearchitect.com      | CI / CD pipeline / build |
-| Load Generators            | 8181       | load.joericearchitect.com       | Load Generator Boxes for performance testing |
-| Dashboard and Metrics App  | 8182       | dashboard.joericearchitect.com  | Dashboard and metrics site            |
-| Private Docker Registry    | 8183       | docker.joericearchitect.com     |             |
-| Portainer (UI for docker)  | 8184       | dockerui.joericearchitect.com   |             |
-| Maven / Gradle Repo        | 8185       | maven.joericearchitect.com      |             |
-| Splunk                     | 8186       | splunk.joericearchitect.com     |             |
-| Kibana                     | 8187       | kibana.joericearchitect.com     |             |
-| Traefik UI                 | 8188       | proxy.joericearchitect.com      |             |
-| JArch Blog MySql           | 8189       | blogdb.joericearchitect.com     |             |
+| Build / CI CD Tool         | 8180       | build.joericearchitect.com       | CI / CD pipeline / build |
+| Load Generators            | 8181       | load.joericearchitect.com         | Load Generator Boxes for performance testing |
+| Dashboard and Metrics App  | 8182       | dashboard.joericearchitect.com    | Dashboard and metrics site            |
+| Private Docker Registry    | 8183       | docker.joericearchitect.com       |             |
+| Portainer (UI for docker)  | 8184       | dockerui.joericearchitect.com     |             |
+| Maven / Gradle Repo        | 8185       | maven.joericearchitect.com        |             |
+| Splunk                     | 8186       | splunk.joericearchitect.com       |             |
+| Kibana                     | 8187       | kibana.joericearchitect.com       |             |
+| Traefik UI                 | 8188       | proxy.joericearchitect.com        |             |
+| JArch Blog MySql           | 8189       | blogdb.joericearchitect.com       |             |
+| Docker Visualizer          | 8190       | dockervisual.joericearchitect.com |             |
 
 # Standard Data Volumes and directories #
 

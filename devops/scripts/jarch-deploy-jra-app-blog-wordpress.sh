@@ -11,7 +11,7 @@
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-PLAYBOOK_FILE=deploy-jra-app-web-static.yml
+PLAYBOOK_FILE=deploy-jra-app-blog-wordpress.yml
 PLAYBOOK_VAR_ENV=latest
 PLAYBOOK_VAR_DOMAIN_PREFIX=""
 

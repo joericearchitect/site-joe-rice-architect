@@ -1,0 +1,182 @@
+---
+# determine the status of each manager node and break them
+# into two groups:
+#   - swarm_manager_operational (swarm is running and active)
+#   - swarm_manager_bootstrap (host needs to be joined to the cluster)
+- hosts: tag_jra_environment_{{ env }}:&tag_jra_swarm_instance_type_swarm_manager
+  become: true
+  tasks:
+    - name: determine swarm status
+      shell: >
+        docker info | egrep '^Swarm: ' | cut -d ' ' -f2
+      register: swarm_status
+
+    - name: create swarm_manager_operational group
+      add_host:
+        hostname: "{{ item }}"
+        groups: swarm_manager_operational
+      with_items: "{{ ansible_play_hosts | default(play_hosts) }}"
+      when: "'active' in hostvars[item].swarm_status.stdout_lines"
+      run_once: true
+
+    - name: create swarm_manager_bootstrap group
+      add_host:
+        hostname: "{{ item }}"
+        groups: swarm_manager_bootstrap
+      with_items: "{{ ansible_play_hosts | default(play_hosts) }}"
+      when: "'active' not in hostvars[item].swarm_status.stdout_lines"
+      run_once: true
+
+# ---------------------------------------------------------------------------
+# Create the wordpress network overlay
+# ---------------------------------------------------------------------------
+# Create the jarch wordpress overlay network
+- hosts: swarm_manager_operational[0]
+  become: true
+  tasks:
+    - name: create jarch wordpress overlay network
+      shell: >
+        docker network create --driver overlay jarch-blog-wordpress-network
+      ignore_errors: yes
+
+# ---------------------------------------------------------------------------
+# Deploy All MySql Services
+# ---------------------------------------------------------------------------
+# Make sure the proper volume mount points are created on all the mysql nodes
+- hosts: tag_jra_environment_{{ env }}:&tag_jra_swarm_node_type_app_persistence
+  become: true
+  tasks:
+    - name: create the wordpress mysql conf mount directory if it doesn't already exist
+      shell: >
+        sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
+      ignore_errors: yes
+
+    - name: create the wordpress mysql data mount directory if it doesn't already exist
+      shell: >
+        sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data
+      ignore_errors: yes
+
+    - name: make sure the processes running inside containers have access to the data directories
+      shell: >
+        sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+      ignore_errors: yes
+
+# Deploy the WordPress Mysql service
+- hosts: swarm_manager_operational[0]
+  become: true
+  tasks:
+    - name: remove etcd service if it exists (ignore failure if it does not exist)
+      shell: >
+        docker service rm jarch-blog-wordpress-mysql-etcd
+      ignore_errors: yes
+
+    - name: get new etcd discovery url
+      shell: >
+        curl -w "\n" 'https://discovery.etcd.io/new?size=1'
+      register: etcd_discovery_url
+
+    - name: Print discovery url
+      debug: msg="discovery-url='{{ etcd_discovery_url.stdout_lines[0] }}'"
+
+    - name: deploy docker etcd service
+      shell: >
+        docker service create
+        --name jarch-blog-wordpress-mysql-etcd
+        --replicas 1
+        --constraint 'node.labels.jra.swarm-node-type == app-persistence'
+        --label jra.environment-flip=blue
+        --label jra.application-name=jarch-blog-wordpress-mysql-etcd
+        --label jra.container-name=jarch-blog-wordpress-mysql-etcd
+        --network jarch-blog-wordpress-network
+        --publish 2379:2379
+        --publish 2380:2380
+        --publish 4001:4001
+        --publish 7001:7001
+        elcolio/etcd:latest
+        -name etcd
+        -discovery={{ etcd_discovery_url.stdout_lines[0] }}
+#
+#  NOTE:  The following lines are temporarily removed cuz getting mysql replication to work with mounts is
+#         proving to be a challenge.  So, for now, not using mounts.  Which means data will be wiped and recreated
+#         each time the service deploys or moves containers.
+#         Add them back once we figure out how to make it work.
+#
+#            --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf,dst=/etc/mysql/conf.d
+#            --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data,dst=/var/lib/mysql
+#
+    - name: deploy mysql cluster service (galera)
+      shell: >
+        docker service create
+        --name jarch-blog-wordpress-mysql-galera
+        --replicas 3
+        --constraint 'node.labels.jra.swarm-node-type == app-persistence'
+        --label jra.environment-flip=blue
+        --label jra.application-name=jarch-blog-wordpress-mysql-galera
+        --label jra.container-name=jarch-blog-wordpress-mysql-galera
+        --network jarch-blog-wordpress-network
+        --env MYSQL_ROOT_PASSWORD=mypassword
+        --env DISCOVERY_SERVICE=jarch-blog-wordpress-mysql-etcd:2379
+        --env XTRABACKUP_PASSWORD=mypassword
+        --env CLUSTER_NAME=galera
+        perconalab/percona-xtradb-cluster:5.6
+
+# ---------------------------------------------------------------------------
+# Deploy Wordpress UI Services
+# ---------------------------------------------------------------------------
+
+# Make sure the proper volume mount points are created on all the wordpress nodes
+- hosts: tag_jra_environment_{{ env }}:&tag_jra_swarm_node_type_app_persistence
+  become: true
+  tasks:
+    - name: create the wordpress ui conf mount directory if it doesn't already exist
+      shell: >
+        sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/data
+      ignore_errors: yes
+
+    - name: create the wordpress ui data mount directory if it doesn't already exist
+      shell: >
+        sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/wp-content
+      ignore_errors: yes
+
+    - name: make sure the processes running inside containers have access to the data directories
+      shell: >
+        sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+      ignore_errors: yes
+#
+#  NOTE:  The following lines are temporarily removed cuz getting mysql replication to work with mounts is
+#         proving to be a challenge.  So, for now, not using mounts.  Which means data will be wiped and recreated
+#         each time the service deploys or moves containers.
+#         Add them back once we figure out how to make it work.
+#
+#            --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/data,dst=/data
+#            --mount type=bind,src=/usr/local/jra/docker-data-volumes/jra-site/blog-wp/wordpress/wp-content,dst=/var/www/html/wp-content
+
+# Deploy the www.joericearchitect.com site service
+- hosts: swarm_manager_operational[0]
+  become: true
+  tasks:
+    - name: remove jarch-blog-wordpress-ui service if it exists (ignore failure if it does not exist)
+      shell: >
+        docker service rm jarch-blog-wordpress-ui
+      ignore_errors: yes
+
+    - name: deploy docker registry service
+      shell: >
+        docker service create
+        --name jarch-blog-wordpress-ui
+        --publish 8081:80
+        --replicas=3
+        --network jarch-proxy-traefik-network
+        --network jarch-blog-wordpress-network
+        --constraint 'node.labels.jra.swarm-node-type == app-ui-web'
+        --label traefik.docker.network=jarch-proxy-traefik-network
+        --label traefik.port=80
+        --label traefik.frontend.rule=Host:{{ env_domain_prefix }}blog.joericearchitect.com
+        --label jra.environment-flip=blue
+        --label jra.application-name=jarch-blog-wordpress-ui
+        --label jra.container-name=jarch-blog-wordpress-ui
+        --label jra.domain-name={{ env_domain_prefix }}blog.joericearchitect.com
+        --env WORDPRESS_DB_HOST=jarch-blog-wordpress-mysql-galera:3306
+        --env WORDPRESS_DB_USER=root
+        --env WORDPRESS_DB_PASSWORD=mypassword
+        joericearchitect/jarch-blog-wordpress-ui

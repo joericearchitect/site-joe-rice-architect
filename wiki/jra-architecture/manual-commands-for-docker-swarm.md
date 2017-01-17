@@ -101,7 +101,7 @@ They may now be out of date.  See the following script files for the source of t
       --label-add name=jra.swarm-manager.manager.latest.us-east-1-az-1.i-1 \
       --label-add environment=latest \
       --label-add environment_type=latest \
-      --label-add failure_zone=us-east-1-az-1 \
+      --label-add failure-zone=us-east-1-az-1 \
       --label-add environment-size=small \
       --label-add swarm-instance-type=swarm-manager \
       --label-add swarm-node-type=swarm-manager \
@@ -112,7 +112,7 @@ They may now be out of date.  See the following script files for the source of t
       --label-add name=jra.swarm-manager.manager.latest.us-east-1-az-2.i-1 \
       --label-add environment=latest \
       --label-add environment_type=latest \
-      --label-add failure_zone=us-east-1-az-2 \
+      --label-add failure-zone=us-east-1-az-2 \
       --label-add environment-size=small \
       --label-add swarm-instance-type=swarm-manager \
       --label-add swarm-node-type=swarm-manager \
@@ -123,7 +123,7 @@ They may now be out of date.  See the following script files for the source of t
       --label-add name=jra.swarm-manager.manager.latest.us-east-1-az-3.i-1 \
       --label-add environment=latest \
       --label-add environment_type=latest \
-      --label-add failure_zone=us-east-1-az-3 \
+      --label-add failure-zone=us-east-1-az-3 \
       --label-add environment-size=small \
       --label-add swarm-instance-type=swarm-manager \
       --label-add swarm-node-type=swarm-manager \
@@ -139,7 +139,7 @@ They may now be out of date.  See the following script files for the source of t
       --label-add name=jra.swarm-node.app-ui-web.latest.us-east-1-az-1.i-1 \
       --label-add environment=latest \
       --label-add environment_type=latest \
-      --label-add failure_zone=us-east-1-az-1 \
+      --label-add failure-zone=us-east-1-az-1 \
       --label-add environment-size=small \
       --label-add swarm-instance-type=swarm-node \
       --label-add swarm-node-type=app-ui-web \
@@ -150,7 +150,7 @@ They may now be out of date.  See the following script files for the source of t
       --label-add name=jra.swarm-node.app-ui-web.latest.us-east-1-az-2.i-1 \
       --label-add environment=latest \
       --label-add environment_type=latest \
-      --label-add failure_zone=us-east-1-az-2 \
+      --label-add failure-zone=us-east-1-az-2 \
       --label-add environment-size=small \
       --label-add swarm-instance-type=swarm-node \
       --label-add swarm-node-type=app-ui-web \
@@ -161,7 +161,7 @@ They may now be out of date.  See the following script files for the source of t
       --label-add name=jra.swarm-node.app-ui-web.latest.us-east-1-az-3.i-1 \
       --label-add environment=latest \
       --label-add environment_type=latest \
-      --label-add failure_zone=us-east-1-az-3 \
+      --label-add failure-zone=us-east-1-az-3 \
       --label-add environment-size=small \
       --label-add swarm-instance-type=swarm-node \
       --label-add swarm-node-type=app-ui-web \
