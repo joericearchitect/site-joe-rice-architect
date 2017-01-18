@@ -81,6 +81,19 @@
   - If you install and run the current experimental version of Docker engine, you can use a tool to convert your docker-compose.yml into the bundle format.  Then deploy the bundle.
   - Docker 1.13 release will support deploying compose files as bundles natively.
 
+**Update 07/18/2017**
+
+* Holy Crikey, Batman (and...uh...[Steve Irwin](https://en.wikipedia.org/wiki/Steve_Irwin))!!!  Just ran across this open source project that promises to solve my data volume issues:  [Flocker](https://clusterhq.com/flocker/introduction/)
+  * A bunch of Docker Swarm mode early adopters across the net are complaining about Docker Swarm Modes problems with data persistence (with good reason).  For same reasons I ran into.
+  * If the docs (and hype) are to be believe, Flocker manages distributed data volumes for Docker and follows the data with stateful containers (MySql, MogoDB, etc).
+  * That would be perfect...if it works.  Going to put it through its paces.
+  * The other features that really, REALLY caught my eye are FlockerHub and Fli products, which claim to be GitHub and Git for data (respectively).  Supposedly, you can "push" your data to a repo, then, pull down into any running containers.
+    + If that really works in the real world, that is HUGE.  Especially for DevOps and automated testing.
+
+* Also, Docker 1.13 is supposed to solve the Docker Compose problem. By allowing to deploy compose apps to Docker swarm using v3 of the compose file format.  No intermediate steps like converting compose files to bundle format.
+  * v3 adds native docker swarm mode concepts like overlay networks, node constraints,
+  * Should be able to push compose
+
 ## Terraform ##
 
 * Early observation (I could be wrong) - I have found creating brand new resources from scratch to be reliable.  But, running "apply" against existing infra to effect changes ran into quite a few problems.

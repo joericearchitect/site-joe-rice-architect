@@ -342,3 +342,6 @@
 ##Useful Open Source Projects##
 * https://github.com/google/cadvisor
 *
+
+##Flocker##
+* https://clusterhq.com/flocker/introduction/

@@ -741,6 +741,24 @@ function setDocumentScrollTop(ypos)
    <li>Docker 1.13 release will support deploying compose files as bundles natively.</li> 
   </ul> </li> 
 </ul> 
+<p><strong>Update 07/18/2017</strong></p> 
+<ul> 
+ <li> <p>Holy Crikey, Batman (and...uh...<a href="https://en.wikipedia.org/wiki/Steve_Irwin">Steve Irwin</a>)!!! Just ran across this open source project that promises to solve my data volume issues: <a href="https://clusterhq.com/flocker/introduction/">Flocker</a></p> 
+  <ul> 
+   <li>A bunch of Docker Swarm mode early adopters across the net are complaining about Docker Swarm Modes problems with data persistence (with good reason). For same reasons I ran into.</li> 
+   <li>If the docs (and hype) are to be believe, Flocker manages distributed data volumes for Docker and follows the data with stateful containers (MySql, MogoDB, etc).</li> 
+   <li>That would be perfect...if it works. Going to put it through its paces.</li> 
+   <li>The other features that really, REALLY caught my eye are FlockerHub and Fli products, which claim to be GitHub and Git for data (respectively). Supposedly, you can &quot;push&quot; your data to a repo, then, pull down into any running containers. 
+    <ul> 
+     <li>If that really works in the real world, that is HUGE. Especially for DevOps and automated testing.</li> 
+    </ul> </li> 
+  </ul> </li> 
+ <li> <p>Also, Docker 1.13 is supposed to solve the Docker Compose problem. By allowing to deploy compose apps to Docker swarm using v3 of the compose file format. No intermediate steps like converting compose files to bundle format.</p> 
+  <ul> 
+   <li>v3 adds native docker swarm mode concepts like overlay networks, node constraints,</li> 
+   <li>Should be able to push compose</li> 
+  </ul> </li> 
+</ul> 
 <h2> <a id="terraform" class="anchor" href="#terraform" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Terraform</h2> 
 <ul> 
  <li>Early observation (I could be wrong) - I have found creating brand new resources from scratch to be reliable. But, running &quot;apply&quot; against existing infra to effect changes ran into quite a few problems.</li> 
