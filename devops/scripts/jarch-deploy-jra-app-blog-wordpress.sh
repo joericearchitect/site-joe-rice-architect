@@ -11,16 +11,17 @@
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-PLAYBOOK_FILE=deploy-jra-app-blog-wordpress.yml
-PLAYBOOK_VAR_ENV=latest
-PLAYBOOK_VAR_DOMAIN_PREFIX=""
-
 source $DIR/jarch-setenv.sh
+
+PLAYBOOK_FILE=./deploy-jra-app-blog-wordpress.yml
+EC2_INVENTORY_FILE=./ec2-inventory/ec2.py
+PLAYBOOK_VAR_ENV=qa1
+PLAYBOOK_VAR_DOMAIN_PREFIX="qa1."
 
 cd $JARCH_DEPLOYMENT_ANSIBLE_DIR
 
-cp $INFRA_ANSIBLE_DIR/ansible.cfg .
+cp $INFRA_MODULES_DOCKER_SWARM_ANSIBLE_DIR/ansible.cfg .
 
-ansible-playbook -i $INFRA_ANSIBLE_DIR/ec2-inventory/ec2.py -v -u ubuntu -e env=$PLAYBOOK_VAR_ENV -e env_domain_prefix=$PLAYBOOK_VAR_DOMAIN_PREFIX --private-key $JRA_BUILD_PRIVATE_KEY_FILE $PLAYBOOK_FILE
+ansible-playbook -i $EC2_INVENTORY_FILE -v -u ubuntu -e env=$PLAYBOOK_VAR_ENV -e env_domain_prefix=$PLAYBOOK_VAR_DOMAIN_PREFIX --private-key $JRA_BUILD_PRIVATE_KEY_FILE $PLAYBOOK_FILE
 
 rm ./ansible.cfg
