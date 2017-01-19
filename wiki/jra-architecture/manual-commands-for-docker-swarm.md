@@ -381,4 +381,97 @@ docker service create \
 
 ###Commands to set up central logging servers###
 
+
+* create an logging overlay network
+
+```
+docker network create --driver overlay jarch-infra-logging-network
+
+```
+
+* Update Operating System mmop count (the default is too small to run elasticsearch)
+
+```
+  sudo sysctl -w vm.max_map_count=262144
+  sudo bash -c 'sudo echo "vm.max_map_count=262144" >> /etc/sysctl.conf'
+
+```
+
+
 * Schedule elastic search container
+
+```
+# This is the preferred command to start elasticsearch.  But, can not get it running in clustered mode as of 1/19/2017
+docker service create \
+   --name jarch-infra-logging-elasticsearch \
+   --replicas=3 \
+   --endpoint-mode dnsrr \
+   --update-parallelism 1 \
+   --update-delay 60s \
+   -e VIRTUAL_HOST=162.243.255.10.xip.io \
+   -e VIRTUAL_PORT=8191 \
+   --network jarch-proxy-traefik-network \
+   --network jarch-infra-logging-network \
+   --constraint 'node.labels.jra.swarm-node-type == infra-logging' \
+   --mount type=bind,source=/usr/local/jra/docker-data-volumes/jra-infra/logging-elasticsearch/data,target=/data \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
+   --label traefik.port=9200 \
+   --label traefik.frontend.rule=Host:es.joericearchitect.com \
+   --label environment-flip="blue" \
+   --label application-name="jarch-infra-logging-elasticsearch" \
+   --label container-name="jarch-infra-logging-elasticsearch" \
+   elasticsearch:2.4 \
+   elasticsearch \
+   -Des.discovery.zen.ping.multicast.enabled=false \
+   -Des.discovery.zen.ping.unicast.hosts=jarch-infra-logging-elasticsearch \
+   -Des.gateway.expected_nodes=3 \
+   -Des.discovery.zen.minimum_master_nodes=2 \
+   -Des.gateway.recover_after_nodes=2 \
+   -Des.network.bind=_eth0:ipv4_
+
+
+# Using this one temporarirly until I can get the clustering part working.
+docker service create \
+   --name jarch-infra-logging-elasticsearch \
+   --publish 8191:9200 \
+   --publish 8192:9300 \
+   --replicas=1 \
+   --network jarch-proxy-traefik-network \
+   --network jarch-infra-logging-network \
+   --constraint 'node.labels.jra.swarm-node-type == infra-logging' \
+   --constraint 'node.labels.jra.failure-zone == us-east-1-az-1' \
+   --mount type=bind,source=/usr/local/jra/docker-data-volumes/jra-infra/logging-elasticsearch/data,target=/data \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
+   --label traefik.port=9200 \
+   --label traefik.frontend.rule=Host:es.joericearchitect.com \
+   --label environment-flip="blue" \
+   --label application-name="jarch-infra-logging-elasticsearch" \
+   --label container-name="jarch-infra-logging-elasticsearch" \
+   elasticsearch:latest \
+   elasticsearch
+
+
+```
+
+* Schedule Kibana container
+
+```
+
+docker service create \
+   --name jarch-infra-logging-kibana \
+   --publish 8187:5601 \
+   --replicas=3 \
+   --network jarch-proxy-traefik-network \
+   --network jarch-infra-logging-network \
+   --constraint 'node.labels.jra.swarm-node-type == infra-logging' \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
+   --label traefik.port=5601 \
+   --label traefik.frontend.rule=Host:kibana.joericearchitect.com \
+   --label environment-flip="blue" \
+   --label application-name="jarch-infra-logging-kibana" \
+   --label container-name="jarch-infra-logging-kibana" \
+   --env ELASTICSEARCH_URL=http://jarch-infra-logging-elasticsearch:9200 \
+   kibana
+
+
+```

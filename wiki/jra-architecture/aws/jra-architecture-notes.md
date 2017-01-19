@@ -175,19 +175,20 @@ This page is a free-form collection of notes and links as I start to build out t
 
 **Joe Rice Architect - Admin, Infrastructure, and Managmement**
 
-| Application | Exposed Port | Domain Name             | Description |
-| ----------- | ------------ | ----------------------- | ----------- |
-| Build / CI CD Tool         | 8180       | build.joericearchitect.com       | CI / CD pipeline / build |
-| Load Generators            | 8181       | load.joericearchitect.com         | Load Generator Boxes for performance testing |
-| Dashboard and Metrics App  | 8182       | dashboard.joericearchitect.com    | Dashboard and metrics site            |
-| Private Docker Registry    | 8183       | docker.joericearchitect.com       |             |
-| Portainer (UI for docker)  | 8184       | dockerui.joericearchitect.com     |             |
-| Maven / Gradle Repo        | 8185       | maven.joericearchitect.com        |             |
-| Splunk                     | 8186       | splunk.joericearchitect.com       |             |
-| Kibana                     | 8187       | kibana.joericearchitect.com       |             |
-| Traefik UI                 | 8188       | proxy.joericearchitect.com        |             |
-| JArch Blog MySql           | 8189       | blogdb.joericearchitect.com       |             |
-| Docker Visualizer          | 8190       | dockervisual.joericearchitect.com |             |
+| Application                | Exposed Port | Container Port | Domain Name                       | Description |
+| -------------------------- | ------------ | -------------- | --------------------------------- | ----------- |
+| Build / CI CD Tool         | 8180         |                | build.joericearchitect.com        | CI / CD pipeline / build |
+| Load Generators            | 8181         |                | load.joericearchitect.com         | Load Generator Boxes for performance testing |
+| Dashboard and Metrics App  | 8182         |                | dashboard.joericearchitect.com    | Dashboard and metrics site            |
+| Private Docker Registry    | 8183         |                | docker.joericearchitect.com       |             |
+| Portainer (UI for docker)  | 8184         |                | dockerui.joericearchitect.com     |             |
+| Maven / Gradle Repo        | 8185         |                | maven.joericearchitect.com        |             |
+| Splunk                     | 8186         |                | splunk.joericearchitect.com       |             |
+| Kibana                     | 8187         |                | kibana.joericearchitect.com       |             |
+| Traefik UI                 | 8188         |                | proxy.joericearchitect.com        |             |
+| JArch Blog MySql           | 8189         |                | blogdb.joericearchitect.com       |             |
+| Docker Visualizer          | 8190         |                | dockervisual.joericearchitect.com |             |
+| ElasticSearch              | 8191         | 9200           | es.joericearchitect.com           |             |
 
 # Standard Data Volumes and directories #
 
@@ -212,6 +213,8 @@ This page is a free-form collection of notes and links as I start to build out t
       + home
     * docker-registry
       + data
+    * logging-elasticsearch
+      + data
   + mta-app
     * site
 
@@ -230,6 +233,13 @@ This page is a free-form collection of notes and links as I start to build out t
       - /usr/local/jra/docker-data-volumes/jra-infra/build-jenkins/home
     + Container
       - /var/jenkins_home
+
+* Infra - ElasticSearch
+  + Home
+    + Host
+      - /usr/local/jra/docker-data-volumes/jra-infra/logging-elasticsearch/data
+    + Container
+      - /data
 
 * Infra - Registry (NOTE:  switch to s3 so we can replicate the service.  Then, remove this mount)
   + data
@@ -280,6 +290,15 @@ This page is a free-form collection of notes and links as I start to build out t
 ```
 sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
 sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+```
+
+* infra-logging
+  /usr/local/jra/docker-data-volumes/jra-infra/logging-elasticsearch/data
+
+```
+sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/logging-elasticsearch/data
 
 sudo chmod -R 777 /usr/local/jra/docker-data-volumes
 ```

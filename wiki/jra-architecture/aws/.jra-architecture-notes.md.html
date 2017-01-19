@@ -847,6 +847,7 @@ function setDocumentScrollTop(ypos)
   <tr> 
    <th>Application</th> 
    <th>Exposed Port</th> 
+   <th>Container Port</th> 
    <th>Domain Name</th> 
    <th>Description</th> 
   </tr> 
@@ -855,61 +856,85 @@ function setDocumentScrollTop(ypos)
   <tr> 
    <td>Build / CI CD Tool</td> 
    <td>8180</td> 
+   <td></td> 
    <td>build.joericearchitect.com</td> 
    <td>CI / CD pipeline / build</td> 
   </tr> 
   <tr> 
    <td>Load Generators</td> 
    <td>8181</td> 
+   <td></td> 
    <td>load.joericearchitect.com</td> 
    <td>Load Generator Boxes for performance testing</td> 
   </tr> 
   <tr> 
    <td>Dashboard and Metrics App</td> 
    <td>8182</td> 
+   <td></td> 
    <td>dashboard.joericearchitect.com</td> 
    <td>Dashboard and metrics site</td> 
   </tr> 
   <tr> 
    <td>Private Docker Registry</td> 
    <td>8183</td> 
+   <td></td> 
    <td>docker.joericearchitect.com</td> 
    <td></td> 
   </tr> 
   <tr> 
    <td>Portainer (UI for docker)</td> 
    <td>8184</td> 
+   <td></td> 
    <td>dockerui.joericearchitect.com</td> 
    <td></td> 
   </tr> 
   <tr> 
    <td>Maven / Gradle Repo</td> 
    <td>8185</td> 
+   <td></td> 
    <td>maven.joericearchitect.com</td> 
    <td></td> 
   </tr> 
   <tr> 
    <td>Splunk</td> 
    <td>8186</td> 
+   <td></td> 
    <td>splunk.joericearchitect.com</td> 
    <td></td> 
   </tr> 
   <tr> 
    <td>Kibana</td> 
    <td>8187</td> 
+   <td></td> 
    <td>kibana.joericearchitect.com</td> 
    <td></td> 
   </tr> 
   <tr> 
    <td>Traefik UI</td> 
    <td>8188</td> 
+   <td></td> 
    <td>proxy.joericearchitect.com</td> 
    <td></td> 
   </tr> 
   <tr> 
    <td>JArch Blog MySql</td> 
    <td>8189</td> 
+   <td></td> 
    <td>blogdb.joericearchitect.com</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Docker Visualizer</td> 
+   <td>8190</td> 
+   <td></td> 
+   <td>dockervisual.joericearchitect.com</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>ElasticSearch</td> 
+   <td>8191</td> 
+   <td>9200</td> 
+   <td>es.joericearchitect.com</td> 
    <td></td> 
   </tr> 
  </tbody> 
@@ -952,6 +977,10 @@ function setDocumentScrollTop(ypos)
       <ul> 
        <li>data</li> 
       </ul> </li> 
+     <li>logging-elasticsearch 
+      <ul> 
+       <li>data</li> 
+      </ul> </li> 
     </ul> </li> 
    <li>mta-app 
     <ul> 
@@ -986,6 +1015,20 @@ function setDocumentScrollTop(ypos)
      <li>Container 
       <ul> 
        <li>/var/jenkins_home</li> 
+      </ul> </li> 
+    </ul> </li> 
+  </ul> </li> 
+ <li> <p>Infra - ElasticSearch</p> 
+  <ul> 
+   <li>Home 
+    <ul> 
+     <li>Host 
+      <ul> 
+       <li>/usr/local/jra/docker-data-volumes/jra-infra/logging-elasticsearch/data</li> 
+      </ul> </li> 
+     <li>Container 
+      <ul> 
+       <li>/data</li> 
       </ul> </li> 
     </ul> </li> 
   </ul> </li> 
@@ -1083,6 +1126,13 @@ function setDocumentScrollTop(ypos)
 </ul> 
 <pre><code>sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/conf
 sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-site/blog-wp/mysql/data
+
+sudo chmod -R 777 /usr/local/jra/docker-data-volumes
+</code></pre> 
+<ul> 
+ <li>infra-logging /usr/local/jra/docker-data-volumes/jra-infra/logging-elasticsearch/data</li> 
+</ul> 
+<pre><code>sudo mkdir -p /usr/local/jra/docker-data-volumes/jra-infra/logging-elasticsearch/data
 
 sudo chmod -R 777 /usr/local/jra/docker-data-volumes
 </code></pre> 
