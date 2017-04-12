@@ -43,6 +43,10 @@
         --publish 8080:8080
         --replicas=3
         --network jarch-proxy-traefik-network
+        --log-driver=fluentd
+        --log-opt fluentd-address=localhost:8282
+        --log-opt labels=jra.environment-flip,jra.swarm-node-name,jra.instance-name,jra.environment,jra.environment-size,jra.environment-type,jra.environment-instance-id,jra.failure-zone,jra.subnet-type,jra.swarm-instance-type,jra.swarm-node-type
+        --log-opt tag='docker.{{.Name}}'
         --constraint 'node.labels.jra.swarm-node-type == app-ui-web'
         --label traefik.docker.network=jarch-proxy-traefik-network
         --label traefik.port=8080

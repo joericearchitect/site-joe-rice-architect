@@ -1081,6 +1081,27 @@ docker service create \
    kibana
 
 
+</code></pre> 
+<ul> 
+ <li>Schedule fluentd-elasticsearch container</li> 
+</ul> 
+<pre><code>
+docker service create \
+   --name jarch-infra-logging-fluentd \
+   --publish 8282:24284 \
+   --replicas=3 \
+   --network jarch-proxy-traefik-network \
+   --network jarch-infra-logging-network \
+   --constraint 'node.labels.jra.swarm-node-type == infra-logging' \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
+   --label traefik.port=5601 \
+   --label traefik.frontend.rule=Host:fluentd.joericearchitect.com \
+   --label environment-flip=&quot;blue&quot; \
+   --label application-name=&quot;jarch-infra-logging-fluentd&quot; \
+   --label container-name=&quot;jarch-infra-logging-fluentd&quot; \
+   joericearchitect/jarch-infra-logging-fluentd
+
+
 </code></pre>
 </body>
 </html>

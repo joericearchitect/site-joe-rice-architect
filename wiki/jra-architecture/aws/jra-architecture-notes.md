@@ -167,16 +167,19 @@ This page is a free-form collection of notes and links as I start to build out t
 
 **Joe Rice Architect - Sites and APIs**
 
-| Application | Exposed Port | Domain Name             | Description |
-| ----------- | ------------ | ----------------------- | ----------- |
-| JArch Web UI  | 8080       | www.joericearchitect.com      | Main Web Site |
-| JArch Blog UI | 8081       | blog.joericearchitect.com     | Blog |
-| JArch Web API | 8082       | webapi.joericearchitect.com   | Main Web Site |
+| Application     | Exposed Port   | Domain Name                   | Description |
+| --------------- | -------------- | ----------------------------- | ----------- |
+| Jarch App Proxy | 80             | <load balancer>               | Proxy incoming port |
+| JArch Web UI    | 8080           | www.joericearchitect.com      | Main Web Site |
+| JArch Blog UI   | 8081           | blog.joericearchitect.com     | Blog |
+| JArch Web API   | 8082           | webapi.joericearchitect.com   | Main Web Site |
 
 **Joe Rice Architect - Admin, Infrastructure, and Managmement**
 
 | Application                | Exposed Port | Container Port | Domain Name                       | Description |
 | -------------------------- | ------------ | -------------- | --------------------------------- | ----------- |
+| Infra Services Proxy       | 81           |                | <load balancer>                   | proxy incoming port |
+| Private Docker Registry    | 8183         |                | docker.joericearchitect.com       |             |
 | Build / CI CD Tool         | 8180         |                | build.joericearchitect.com        | CI / CD pipeline / build |
 | Load Generators            | 8181         |                | load.joericearchitect.com         | Load Generator Boxes for performance testing |
 | Dashboard and Metrics App  | 8182         |                | dashboard.joericearchitect.com    | Dashboard and metrics site            |
@@ -189,6 +192,19 @@ This page is a free-form collection of notes and links as I start to build out t
 | JArch Blog MySql           | 8189         |                | blogdb.joericearchitect.com       |             |
 | Docker Visualizer          | 8190         |                | dockervisual.joericearchitect.com |             |
 | ElasticSearch              | 8191         | 9200           | es.joericearchitect.com           |             |
+
+
+**Joe Rice Architect - Infra - Logging**
+
+| Application                | Exposed Port | Container Port | Domain Name                       | Description |
+| -------------------------- | ------------ | -------------- | --------------------------------- | ----------- |
+| Infra Logging Proxy        | 82           |                | <loaod balancer>                  | proxy incoming port |
+| Kibana                     | 8280         |                | kibana.joericearchitect.com       |             |
+| ElasticSearch              | 8281         | 9200           | es.joericearchitect.com           |             |
+| FluentD Collector          | 8282         | 24284          | splunk.joericearchitect.com       |             |
+| FluentD Collector          | 8283         |                | splunk.joericearchitect.com       |             |
+| Splunk                     | 8284         |                | fluentd.joericearchitect.com      |             |
+
 
 # Standard Data Volumes and directories #
 

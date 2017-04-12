@@ -272,6 +272,8 @@ docker service create \
    --publish 8080:8080 \
    --replicas=3 \
    --network jarch-proxy-traefik-network \
+   --log-driver=fluentd \
+   --log-opt fluentd-address=localhost:8282
    --constraint 'node.labels.com.jra.swarm-node-type == app-ui-web' \
    --label traefik.docker.network=jarch-proxy-traefik-network \
    --label traefik.port=8080 \
@@ -472,6 +474,29 @@ docker service create \
    --label container-name="jarch-infra-logging-kibana" \
    --env ELASTICSEARCH_URL=http://jarch-infra-logging-elasticsearch:9200 \
    kibana
+
+
+```
+
+* Schedule fluentd-elasticsearch container
+
+```
+
+docker service create \
+   --name jarch-infra-logging-fluentd \
+   --publish 8282:24224 \
+   --replicas=3 \
+   --network jarch-proxy-traefik-network \
+   --network jarch-infra-logging-network \
+   --constraint 'node.labels.jra.swarm-node-type == infra-logging' \
+   --mount type=bind,source=/usr/local/jra/docker-data-volumes/jra-infra/logging-fluentd/data,target=/fluentd/log \
+   --label traefik.docker.network=jarch-proxy-traefik-network \
+   --label traefik.port=24284 \
+   --label traefik.frontend.rule=Host:fluentd.joericearchitect.com \
+   --label environment-flip="blue" \
+   --label application-name="jarch-infra-logging-fluentd" \
+   --label container-name="jarch-infra-logging-fluentd" \
+   joericearchitect/jarch-infra-logging-fluentd
 
 
 ```
