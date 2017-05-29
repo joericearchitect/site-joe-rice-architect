@@ -4,7 +4,7 @@
 
 
 
-##Photoshop##
+##Photoshop
 * http://www.photoshopessentials.com/photo-effects/photo-blend/
 * http://photoshopcafe.com/tutorials/blend/blend.html
 * https://www.youtube.com/watch?v=h5yW5hHjQrE
@@ -14,11 +14,11 @@
 * https://www.youtube.com/watch?v=SHijeQyKH8M
 * https://www.youtube.com/watch?v=SiQwM2LBsf8
 
-##Design / UI Tools##
+##Design / UI Tools
 * http://andrew.hedges.name/experiments/aspect_ratio/
 * http://www.colorexplorer.com/colormatch.aspx
 
-##CSS##
+##CSS
 * http://uigradients.com/#
 * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Using_CSS_gradients
 * https://css-tricks.com/examples/CSS3Gradient/
@@ -27,20 +27,20 @@
 * http://codepen.io/anon/pen/ozaJQp
 * https://www.w3.org/TR/CSS21/visuren.html
 * http://css-101.org/fixed-positioning/index.php
-##* Tools:##
+##Tools:
 * http://subtlepatterns.com/?s=wood&submit=Search
 * http://www.colorzilla.com/gradient-editor/
 * Designs
 * http://www.wix.com/blog/2015/02/5-golden-tips-for-creating-fullscreen-website-backgrounds/
 
-##Angular##
+##Angular
 * https://docs.angularjs.org/guide/concepts
 * https://angular.io/docs/ts/latest/guide/architecture.html
 * http://angular-ui.github.io/bootstrap/
 * http://www.baasic.com/2016/01/13/Using-social-login-in-AngularJs/
 * https://www.sitepoint.com/scroll-based-animations-jquery-css3/
 
-##General Infrastructure##
+##General Infrastructure
 * http://randomdotnext.com/host-multiple-sites-on-single-ec2-instance-nginx-node/
 * http://shlomoswidler.com/2009/12/use-elb-to-serve-multiple-ssl-domains.html
 * http://jasonwilder.com/blog/2014/03/25/automated-nginx-reverse-proxy-for-docker/
@@ -51,7 +51,7 @@
 * https://github.com/kazu69/docker-efk
 * https://www.infoq.com/articles/continuous-deployment-containers
 
-##Node JS##
+##Node JS
 * Continuous Delivery
   * https://blog.risingstack.com/continuous-deployment-of-node-js-applications/
   * http://withouttheloop.com/articles/2016-05-26-automating-deployment-of-nodejs-applications/
@@ -95,16 +95,16 @@
   * http://blog.mixu.net/2011/02/02/essential-node-js-patterns-and-snippets/
   * https://github.com/bahmutov/talks/blob/master/dependencies-best-practices-node.md
 
-##Online Utility Tools##
+##Online Utility Tools
 * https://runkit.com/home
 
-##Adobe Creative Cloud##
+##Adobe Creative Cloud
 * http://prodesigntools.com/adobe-cc-2015-5-direct-download-links.html#at_pco=smlwn-1.0&at_si=5800665dc1b0d327&at_ab=per-2&at_pos=0&at_tot=1
 * http://prodesigntools.com/adobe-creative-cloud-myths.html
 * http://blog.digitaltutors.com/whats-difference-photoshop-illustrator/
 * http://www.printwand.com/blog/when-to-use-adobe-illustrator-vs-photoshop-vs-indesign
 
-##MEAN##
+##MEAN
 * http://adndevblog.typepad.com/cloud_and_mobile/2015/07/restful-website-architecture-with-node-and-angular.html
 * http://mean.io/
 * https://scotch.io/tutorials/node-and-angular-to-do-app-application-organization-and-structure
@@ -112,14 +112,14 @@
 * http://adrianmejia.com/blog/2014/10/01/creating-a-restful-api-tutorial-with-nodejs-and-mongodb/
 * https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
 
-##Bootstrap##
+##Bootstrap
 * http://themes.getbootstrap.com/products/application
 * http://www.kodingmadesimple.com/2015/01/twitter-bootstrap-carousel-tutorial-examples.html
 * http://www.kodingmadesimple.com/2015/05/twitter-bootstrap-responsive-image-gallery-tutorial-lightbox.html
 * http://www.kodingmadesimple.com/2015/03/twitter-bootstrap-image-classes-example.html
 * https://startbootstrap.com/template-overviews/scrolling-nav/
 
-##Wordpress##
+##Wordpress
 * https://hub.docker.com/_/wordpress/
 * https://www.youtube.com/watch?v=1o2XcHqQbRY
 * http://www.idesignstudios.com/blog/web-design/wordpress-as-cms/#.WAB8yfG-WGc
@@ -145,7 +145,7 @@
   * https://visible.vc/engineering/wordpress-developer-workflow/
   * https://codex.wordpress.org/Creating_a_Static_Front_Page
 
-##Design Ideas / Examples##
+##Design Ideas / Examples
 * https://spark.adobe.com/
 * https://api.jquery.com/load-event/
 * https://blog.codeship.com/docker-machine-compose-and-swarm-how-they-work-together/
@@ -160,7 +160,7 @@
 * Look at the share feature on the
 * https://www.sitepoint.com/
 
-##Docker##
+##Docker
 * http://blog.scottlowe.org/2016/03/25/docker-swarm-aws-docker-machine/
 * https://www.linkedin.com/pulse/tutorial-deploying-your-first-docker-container-aws-ec2-wootton
 * https://www.infoq.com/news/2016/02/docker-datacenter-caas
@@ -212,30 +212,30 @@
 *  Persistence
    *  https://thenewstack.io/methods-dealing-container-storage/
 
-##Python and Scripting##
+##Python and Scripting
 * http://www.vogella.com/tutorials/Python/article.html
 * https://aws.amazon.com/articles/3998
 
-##AWS##
+##AWS
 * http://www.businessinsider.com/amazon-cto-makes-dig-at-pokemon-go-crash-2016-7
 * https://www.expeditedssl.com/aws-in-plain-english
 
-##HTML Screen Scraping##
+##HTML Screen Scraping
 * https://blog.hartleybrody.com/web-scraping/
 * http://stackoverflow.com/questions/22168883/whats-the-best-way-of-scraping-data-from-a-website
 
-##GoDaddy##
+##GoDaddy
 * https://www.godaddy.com/help/move-a-domain-to-another-godaddy-account-822
 
-##NginX##
+##NginX
 * https://forum.ivorde.com/nginx-how-to-list-virtual-hosts-t19775.html
 * https://hub.docker.com/r/jwilder/nginx-proxy/
 
 
-##Twitter##
+##Twitter
 * https://code.tutsplus.com/tutorials/building-with-the-twitter-api-getting-started--cms-22192
 
-##Drupal##
+##Drupal
 * https://www.drupal.org/project/angularjs
 * http://getlevelten.com/blog/brent-bice/best-drupal-modules-creating-engaging-blogs
 * Docker
@@ -257,22 +257,22 @@
 * http://websitesetup.org/build-website-drupal/
 * http://www.drupaltherapy.com/gmap
 
-##Terraform##
+##Terraform
 * https://www.terraform.io/intro/getting-started/build.html
 * https://aws.amazon.com/blogs/apn/terraform-beyond-the-basics-with-aws/
 * https://github.com/hashicorp/terraform/tree/master/examples/aws-two-tier'
 
-##Interesting Blog Posts##
+##Interesting Blog Posts
 * https://segment.com/blog/why-microservices/
 * https://segment.com/blog/engineering-best-practices/
 * https://www.terraform.io/intro/examples/aws.html
 
-##Git##
+##Git
 * http://blogs.atlassian.com/2013/03/git-submodules-workflows-tips/
 * http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/
 * https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
-##Vagrant##
+##Vagrant
 * https://github.com/leighmcculloch/vagrant-docker-compose
 * https://github.com/erran-r7/multiple_vagrantfiles
 * https://www.sitepoint.com/vagrantfile-explained-setting-provisioning-shell/
@@ -281,23 +281,23 @@
 * http://stackoverflow.com/questions/19648088/pass-environment-variables-to-vagrant-shell-provisioner
 * https://github.com/mitchellh/vagrant/issues/6707
 
-##YAML##
+##YAML
 * https://learn.getgrav.org/advanced/yaml
 * http://www.yaml.org/start.html
 
-##Big Data and Visualization##
+##Big Data and Visualization
 * http://www.slideshare.net/BenLaird/real-time-data-viz-with-spark-streaming-kafka-and-d3js
 
-##Utility Tools##
+##Utility Tools
 * http://www.webgraphviz.com/
 
-##Training Videos / Courses##
+##Training Videos / Courses
 * Docker
     * https://app.pluralsight.com/player?author=nigel-poulton&name=docker-swarm-native-docker-clustering-m3&mode=live&clip=2&course=docker-swarm-native-docker-clustering
 * AWS
     * https://www.pluralsight.com/courses/aws-vpc-operations
 
-##Dev-Ops##
+##Dev-Ops
 * https://blog.gruntwork.io/why-we-use-terraform-and-not-chef-puppet-ansible-saltstack-or-cloudformation-7989dad2865c#.6jvs960cr
 * https://www.infoq.com/articles/continuous-deployment-containers
     * https://leanpub.com/the-devops-2-toolkit
@@ -307,45 +307,45 @@
 * https://www.blazemeter.com/blog/running-jmeter-test-jenkins-pipeline-tutorial
 * https://www.blazemeter.com/blog/continuous-integration-101-how-run-jmeter-jenkins
 
-##JMeter##
+##JMeter
 * https://gist.github.com/hhcordero/abd1dcaf6654cfe51d0b
 * https://www.blazemeter.com/blog/running-jmeter-test-jenkins-pipeline-tutorial
 * https://www.blazemeter.com/blog/continuous-integration-101-how-run-jmeter-jenkins
 
-##Configuration Management##
+##Configuration Management
 * https://www.digitalocean.com/community/tutorials/an-introduction-to-configuration-management
 
-##Ansible##
+##Ansible
 * https://www.digitalocean.com/community/tutorials/configuration-management-101-writing-ansible-playbooks
 * https://spin.atomicobject.com/2016/05/16/ansible-aws-ec2-vpc/
 
-##Traefik (dynamic reverse proxy that can automatically work with Docker Containers)##
+##Traefik (dynamic reverse proxy that can automatically work with Docker Containers)
 * https://traefik.io/
 * https://docs.traefik.io/user-guide/swarm-mode/
 * http://blog.programster.org/using-traefik-with-docker-swarm-for-deploying-web-applications/
 * https://blog.hypriot.com/post/microservices-bliss-with-docker-and-traefik/
 * http://programmableinfrastructure.com/guides/load-balancing/traefik/
 
-##Docker Web UI##
+##Docker Web UI
 
 * http://portainer.io/
 * https://blog.hypriot.com/post/new-docker-ui-portainer/
 * https://github.com/kevana/ui-for-docker
 
 
-##MySql##
+##MySql
 * http://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking
 
-##Logging & monitoring##
+##Logging & monitoring
 * https://sematext.com/blog/2016/09/19/docker-swarm-mode-full-cluster-monitoring-logging-with-1-command/
 * https://github.com/google/cadvisor
 * https://dzone.com/articles/monitoring-docker-containers-with-elasticsearch-an
 
-##Useful Open Source Projects##
+##Useful Open Source Projects
 * https://github.com/google/cadvisor
 *
 
-##Flocker##
+##Flocker
 * https://clusterhq.com/flocker/introduction/
 * https://flocker-docs.clusterhq.com/en/latest/flocker-features/architecture.html
 * 
