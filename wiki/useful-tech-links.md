@@ -209,6 +209,8 @@
     * https://docs.docker.com/compose/extends/
     * https://docs.docker.com/compose/production/
     * http://blog.hypriot.com/post/docker-compose-nodejs-haproxy/
+*  Persistence
+   *  https://thenewstack.io/methods-dealing-container-storage/
 
 ##Python and Scripting##
 * http://www.vogella.com/tutorials/Python/article.html
