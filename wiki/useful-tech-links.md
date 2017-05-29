@@ -1,10 +1,10 @@
 
-## Useful AWS command-line examples
+##Useful AWS command-line examples
 
 
 
 
-##Photoshop
+## Photoshop
 * http://www.photoshopessentials.com/photo-effects/photo-blend/
 * http://photoshopcafe.com/tutorials/blend/blend.html
 * https://www.youtube.com/watch?v=h5yW5hHjQrE
