@@ -157,8 +157,18 @@ This page is a free-form collection of notes and links as I start to build out t
 
 **Standard Tags on Swarm Services (applications)**
 * jra.application-name
-* jra.application-name-short
+* jra.application-name-full
 * jra.application-type
+  - api-business-service
+  - api-ui-service
+  - api-utility-service
+  - api-information-service
+  - admin-build
+  - admin-ui
+  - admin-db
+  - infra-logging-db
+  - infra-logging-collector
+  - infra-logging-ui
 * jra.application-url-health-check
 * jra.application-url-metrics
 * jra.application-url-main
