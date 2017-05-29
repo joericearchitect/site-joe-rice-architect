@@ -155,6 +155,15 @@ This page is a free-form collection of notes and links as I start to build out t
   - us-west-1-az-2
   - us-east-1-az-3
 
+**Standard Tags on Swarm Services (applications)**
+* jra.application-name
+* jra.application-name-short
+* jra.application-type
+* jra.application-url-health-check
+* jra.application-url-metrics
+* jra.application-url-main
+
+
 **Ports to open for security groups**
 
 * Overlay network between all swarm nodes in application network:
