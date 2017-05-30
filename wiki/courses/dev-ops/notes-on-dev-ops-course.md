@@ -10,6 +10,10 @@ Anything related to DevOps jot down here.
  # Notes on Value Proposition
  
  * IT can be a competitive advantage and not just a cost center
- * 
+ * Statistical model for IT Performance:
+   - lead time for changes (from commit to deploy)
+     + How long would it take your organization to deploy a change that involves just a single line of code.  Do you do this on a repeatable, reliable basis?"
+   - Release Frefuency
+   - Time to Restore Service
  
  ## Resources

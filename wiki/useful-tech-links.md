@@ -349,3 +349,10 @@
 * https://clusterhq.com/flocker/introduction/
 * https://flocker-docs.clusterhq.com/en/latest/flocker-features/architecture.html
 * 
+
+## Spring Boot
+
+* Correlation Id & RequestId header propagation
+  - https://github.com/stevesaliman/spring-boot-starter-request-correlation
+  
+* 
