@@ -211,6 +211,8 @@
     * http://blog.hypriot.com/post/docker-compose-nodejs-haproxy/
 *  Persistence
    *  https://thenewstack.io/methods-dealing-container-storage/
+*  Metrics
+   *  https://docs.docker.com/engine/admin/runmetrics/
 
 ## Python and Scripting
 * http://www.vogella.com/tutorials/Python/article.html
@@ -355,4 +357,11 @@
 * Correlation Id & RequestId header propagation
   - https://github.com/stevesaliman/spring-boot-starter-request-correlation
   
+## API Design
+* http://stateless.co/hal_specification.html
+* http://zalando.github.io/restful-api-guidelines/
+* http://blogs.mulesoft.com/dev/api-dev/api-best-practices-hypermedia-part-3/
+* https://sookocheff.com/post/api/on-choosing-a-hypermedia-format/
+* http://51elliot.blogspot.com/2014/06/rest-api-best-practices-4-collections.html
+* http://jsonapi.org/examples/
 * 
