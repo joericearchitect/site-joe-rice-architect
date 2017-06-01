@@ -356,6 +356,8 @@
 
 * Correlation Id & RequestId header propagation
   - https://github.com/stevesaliman/spring-boot-starter-request-correlation
+* REST API
+  - http://spring.io/guides/tutorials/bookmarks/
   
 ## API Design
 * http://stateless.co/hal_specification.html
@@ -364,4 +366,16 @@
 * https://sookocheff.com/post/api/on-choosing-a-hypermedia-format/
 * http://51elliot.blogspot.com/2014/06/rest-api-best-practices-4-collections.html
 * http://jsonapi.org/examples/
-* 
+* http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
+* https://sookocheff.com/post/api/on-choosing-a-hypermedia-format/
+
+## Swagger
+* https://github.com/OAI/OpenAPI-Specification
+* http://swagger.io/specification/
+
+## Misc
+* A distributed tracing tool - sounds neat - research it:
+  - http://zipkin.io/pages/existing_instrumentations.html
+* Site that allows you to publish documents:  https://readthedocs.org
+* site that monitors github projects for vulnerabilities: https://www.versioneye.com/
+
