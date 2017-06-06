@@ -372,6 +372,7 @@
 ## Swagger
 * https://github.com/OAI/OpenAPI-Specification
 * http://swagger.io/specification/
+* http://idratherbewriting.com/2015/12/10/ten-realizations-using-swagger-and-swagger-ui/
 
 ## Misc
 * A distributed tracing tool - sounds neat - research it:
@@ -379,3 +380,7 @@
 * Site that allows you to publish documents:  https://readthedocs.org
 * site that monitors github projects for vulnerabilities: https://www.versioneye.com/
 
+
+##Technical Papers
+
+* Draper - a Large Scale distributed tracing system - https://research.google.com/pubs/pub36356.html
